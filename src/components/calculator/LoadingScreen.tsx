@@ -178,7 +178,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
       </motion.button>
 
       {/* Main Content - Unified layout */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
+      <div className="relative z-10 min-h-screen flex flex-col justify-start pt-20 p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
           variants={containerVariants}
