@@ -70,7 +70,7 @@ const Index = () => {
       className={`min-h-screen relative overflow-hidden ${isDark ? "bg-gradient-mobile-dark" : "bg-gradient-mobile-light"}`}
     >
       {/* Simplified background elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden sm:-top-[231px] sm:left-[384px]">
         {/* Floating orbs - reduced intensity */}
         <motion.div
           className="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-gradient-primary opacity-20 blur-3xl floating"
