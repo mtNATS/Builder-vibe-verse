@@ -197,7 +197,7 @@ const Index = () => {
                   Fusion Starter
                 </CardTitle>
                 <CardDescription className="text-sm text-muted-foreground mb-6">
-                  Калькулятор логистических за��рат
+                  Калькулятор логистических затрат
                 </CardDescription>
 
                 {/* Main CTA Button - Unified height */}
@@ -255,6 +255,29 @@ const Index = () => {
                       Быстрые результаты
                     </p>
                   </motion.div>
+                </motion.div>
+
+                {/* Navigation Links */}
+                <motion.div
+                  variants={itemVariants}
+                  className="grid grid-cols-2 gap-3"
+                >
+                  <Button
+                    variant="outline"
+                    onClick={() => navigate("/cards-demo")}
+                    className={`h-12 text-sm ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
+                  >
+                    <Package className="w-4 h-4 mr-2" />
+                    Компоненты
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => navigate("/history")}
+                    className={`h-12 text-sm ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
+                  >
+                    <TrendingUp className="w-4 h-4 mr-2" />
+                    История
+                  </Button>
                 </motion.div>
 
                 {/* Additional Info - Unified styling */}
