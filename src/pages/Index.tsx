@@ -161,33 +161,50 @@ const Index = () => {
                     backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
                   }}
                 >
-                  {/* Custom Logo SVG */}
+                  {/* Exact Logo SVG */}
                   <svg
-                    width="40"
-                    height="40"
+                    width="50"
+                    height="50"
                     viewBox="0 0 100 100"
                     className="relative z-10"
                   >
-                    {/* Outer circle */}
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="48"
+                    {/* Outer circle with organic shape */}
+                    <path
+                      d="M50 5 C75 5 95 25 95 50 C95 65 88 78 77 87 C70 92 62 95 50 95 C25 95 5 75 5 50 C5 35 12 22 23 13 C30 8 38 5 50 5 Z"
                       fill="none"
                       stroke="white"
-                      strokeWidth="4"
+                      strokeWidth="3"
                     />
 
-                    {/* Custom character/symbol - based on the logo design */}
+                    {/* Main vertical stem of the 't' */}
                     <path
-                      d="M35 25 L65 25 Q70 25 70 30 L70 45 Q70 50 65 50 L50 50 L50 65 Q50 70 45 70 L35 70 Q30 70 30 65 L30 30 Q30 25 35 25 Z"
+                      d="M35 20 L35 75 C35 78 37 80 40 80 L45 80 C48 80 50 78 50 75 L50 45"
                       fill="white"
                     />
 
-                    {/* Additional detail - flowing element */}
+                    {/* Horizontal top of the 't' */}
                     <path
-                      d="M45 35 Q55 40 65 35 Q60 45 50 40 Q40 45 35 35 Q45 30 45 35 Z"
+                      d="M25 30 L55 30 C58 30 60 28 60 25 C60 22 58 20 55 20 L30 20 C27 20 25 22 25 25 C25 27 25 28.5 25 30 Z"
+                      fill="white"
+                    />
+
+                    {/* Flowing ribbon/banner element */}
+                    <path
+                      d="M45 35 C50 32 58 33 65 36 C70 38 75 42 75 48 C75 52 72 55 68 56 C63 57 57 55 52 52 C48 49 45 45 42 41 C40 38 40 36 42 35 C43 34.5 44 34.5 45 35 Z"
+                      fill="white"
+                    />
+
+                    {/* Inner shadow/depth for the ribbon */}
+                    <path
+                      d="M48 38 C52 37 58 38 63 40 C67 42 70 45 70 48 C70 50 68 51 65 51 C61 51 56 49 52 47 C49 45 47 42 47 40 C47 39 47.5 38.5 48 38 Z"
                       fill="rgb(156, 163, 175)"
+                      opacity="0.4"
+                    />
+
+                    {/* Bottom part of 't' with rounded end */}
+                    <path
+                      d="M35 65 L35 75 C35 78 37 80 40 80 L45 80 C48 80 50 78 50 75 L50 70"
+                      fill="white"
                     />
                   </svg>
                 </motion.div>
