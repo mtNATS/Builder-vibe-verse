@@ -161,74 +161,90 @@ const Index = () => {
                     backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
                   }}
                 >
-                  {/* Exact Logo SVG - Stylized 't' with flowing ribbon */}
+                  {/* Perfect Logo Replica */}
                   <svg
                     width="50"
                     height="50"
                     viewBox="0 0 100 100"
                     className="relative z-10"
                   >
-                    {/* Perfect circle outline */}
+                    {/* Circle outline */}
                     <circle
                       cx="50"
                       cy="50"
-                      r="45"
+                      r="46"
                       fill="none"
                       stroke="white"
-                      strokeWidth="4"
+                      strokeWidth="3.5"
                     />
 
-                    {/* Main vertical stem of the 't' - left side */}
-                    <rect
-                      x="30"
-                      y="20"
-                      width="12"
-                      height="55"
-                      rx="6"
+                    {/* Vertical stem of 't' */}
+                    <path
+                      d="M32 18
+                         L38 18
+                         C40 18 42 20 42 22
+                         L42 75
+                         C42 77 40 79 38 79
+                         L32 79
+                         C30 79 28 77 28 75
+                         L28 22
+                         C28 20 30 18 32 18 Z"
                       fill="white"
                     />
 
-                    {/* Flowing horizontal ribbon/banner */}
+                    {/* Top horizontal bar */}
                     <path
-                      d="M25 35
-                         C25 32 27 30 30 30
-                         L70 30
-                         C85 30 90 35 88 42
-                         C86 48 80 52 72 50
-                         L65 48
-                         C60 46 55 44 50 42
-                         L45 40
-                         C40 38 35 36 30 35
-                         C27 34 25 34 25 35 Z"
+                      d="M22 30
+                         L50 30
+                         C52 30 54 28 54 26
+                         C54 24 52 22 50 22
+                         L26 22
+                         C24 22 22 24 22 26
+                         C22 28 22 30 22 30 Z"
                       fill="white"
                     />
 
-                    {/* Subtle shadow/depth on the ribbon */}
+                    {/* Flowing ribbon banner */}
                     <path
-                      d="M30 35
-                         L65 35
-                         C75 35 80 38 78 42
-                         C76 45 70 47 62 45
-                         L55 43
-                         C50 41 45 39 40 37
-                         L35 36
-                         C32 35 30 35 30 35 Z"
-                      fill="rgb(156, 163, 175)"
-                      opacity="0.3"
+                      d="M28 38
+                         C28 36 30 34 32 34
+                         L75 34
+                         C78 34 80 36 80 39
+                         C80 42 79 45 76 47
+                         C73 49 69 50 65 49
+                         L58 47
+                         C52 45 46 42 40 40
+                         L34 38
+                         C31 37 28 37 28 38 Z"
+                      fill="white"
+                    />
+
+                    {/* Ribbon shadow/depth */}
+                    <path
+                      d="M32 38
+                         L70 38
+                         C73 38 75 39 75 41
+                         C75 43 73 45 70 46
+                         L62 47
+                         C56 46 50 44 44 42
+                         L38 40
+                         C35 39 32 38 32 38 Z"
+                      fill="white"
+                      opacity="0.7"
                     />
 
                     {/* Bottom horizontal base */}
-                    <rect
-                      x="30"
-                      y="65"
-                      width="35"
-                      height="12"
-                      rx="6"
+                    <path
+                      d="M28 65
+                         L68 65
+                         C72 65 75 68 75 72
+                         C75 76 72 79 68 79
+                         L32 79
+                         C30 79 28 77 28 75
+                         L28 69
+                         C28 67 28 65 28 65 Z"
                       fill="white"
                     />
-
-                    {/* Rounded end cap for the bottom */}
-                    <circle cx="65" cy="71" r="6" fill="white" />
                   </svg>
                 </motion.div>
 
