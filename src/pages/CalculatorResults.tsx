@@ -207,51 +207,20 @@ const CalculatorResults = () => {
           animate="visible"
         >
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0 shadow-xl">
-              <CardHeader className="text-center relative p-6">
-                {/* Product Icon - Unified size */}
-                <motion.div
-                  className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-secondary opacity-90 rounded-2xl" />
-                  <Package className="w-8 h-8 text-white relative z-10" />
-                </motion.div>
-
-                {/* Product Title - Unified typography */}
-                <CardTitle className="text-xl font-bold text-foreground mb-3 leading-tight">
-                  {results.productInfo.title}
-                </CardTitle>
-
-                {/* Rating and Reviews - Unified spacing */}
-                <div className="flex items-center justify-center gap-3 mb-4">
-                  <div
-                    className={`flex items-center gap-1 ${isDark ? "glass" : "neu"} rounded-full px-3 py-2`}
-                  >
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="text-yellow-400 text-sm font-medium">
-                      {results.productInfo.rating}
-                    </span>
-                  </div>
-                  <Badge
-                    variant="secondary"
-                    className={`${isDark ? "glass" : "neu"} border-0 text-muted-foreground text-sm px-3 py-1`}
-                  >
-                    {results.productInfo.reviewCount?.toLocaleString("ru-RU")}{" "}
-                    отзывов
-                  </Badge>
-                </div>
-
-                {/* Price - Unified typography */}
-                <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-6">
-                  {formatCurrency(results.productInfo.price)}
-                </div>
-              </CardHeader>
-
-              <CardContent className="p-6 pt-0 space-y-8">
-                {/* Action Buttons - Unified height and spacing */}
-                <motion.div
+            <ProductCard
+              product={results.productInfo}
+              isDark={isDark}
+              compact={true}
+              onViewDetails={() =>
+                navigate("/product-details", {
+                  state: { product: results.productInfo },
+                })
+              }
+              onAddToFavorites={() => console.log("Add to favorites")}
+              onShare={() => console.log("Share product")}
+              onAnalytics={() => console.log("View analytics")}
+            />
+          </motion.div>
                   variants={itemVariants}
                   className="grid grid-cols-2 gap-4"
                 >
