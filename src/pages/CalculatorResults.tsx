@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
-  ArrowRight,
   Star,
   TrendingUp,
-  TrendingDown,
   Package,
   CreditCard,
   Info,
   Sparkles,
-  Target,
-  Zap,
   Moon,
   Sun,
+  Share2,
+  Download,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -118,7 +116,7 @@ const CalculatorResults = () => {
     <div
       className={`min-h-screen relative overflow-hidden ${isDark ? "bg-gradient-mobile-dark" : "bg-gradient-mobile-light"}`}
     >
-      {/* Simplified background elements matching Index page */}
+      {/* Background elements matching Index page */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-gradient-primary opacity-20 blur-3xl floating"
@@ -158,18 +156,31 @@ const CalculatorResults = () => {
         />
       </div>
 
-      {/* Header */}
+      {/* Theme Toggle */}
+      <motion.button
+        onClick={toggleTheme}
+        className="absolute top-6 right-6 z-50 p-3 glass-button text-foreground"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      </motion.button>
+
+      {/* Header - Unified spacing */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 p-6 pb-2"
+        className="relative z-10 p-6"
       >
-        <div className="flex items-center justify-between mb-4 max-w-md mx-auto">
+        <div className="flex items-center justify-between max-w-md mx-auto">
           <Button
             variant="ghost"
             size="icon"
             onClick={goBack}
-            className="glass-button text-foreground hover:bg-white/10 rounded-full"
+            className="glass-button text-foreground hover:bg-white/10 rounded-full h-12 w-12"
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
@@ -185,8 +196,8 @@ const CalculatorResults = () => {
         </div>
       </motion.div>
 
-      {/* Main Content in Index page style */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center sm:justify-start sm:items-center p-4 max-w-md mx-auto">
+      {/* Main Content - Unified layout */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
           variants={containerVariants}
@@ -194,9 +205,9 @@ const CalculatorResults = () => {
           animate="visible"
         >
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0 shadow-xl sm:flex sm:flex-col">
-              <CardHeader className="text-center relative pb-4 sm:pt-6 sm:justify-center sm:items-center sm:ml-auto">
-                {/* Product Info Header */}
+            <Card className="glass-card border-0 shadow-xl">
+              <CardHeader className="text-center relative p-6">
+                {/* Product Icon - Unified size */}
                 <motion.div
                   className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
                   whileHover={{ scale: 1.02 }}
@@ -206,87 +217,92 @@ const CalculatorResults = () => {
                   <Package className="w-8 h-8 text-white relative z-10" />
                 </motion.div>
 
-                {/* Product Title */}
-                <CardTitle className="text-lg font-bold text-foreground mb-2 leading-tight">
+                {/* Product Title - Unified typography */}
+                <CardTitle className="text-xl font-bold text-foreground mb-3 leading-tight">
                   {results.productInfo.title}
                 </CardTitle>
 
-                {/* Rating and Reviews */}
-                <div className="flex items-center justify-center gap-3 mb-3">
+                {/* Rating and Reviews - Unified spacing */}
+                <div className="flex items-center justify-center gap-3 mb-4">
                   <div
-                    className={`flex items-center gap-1 ${isDark ? "glass" : "neu"} rounded-full px-3 py-1`}
+                    className={`flex items-center gap-1 ${isDark ? "glass" : "neu"} rounded-full px-3 py-2`}
                   >
-                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
                     <span className="text-yellow-400 text-sm font-medium">
                       {results.productInfo.rating}
                     </span>
                   </div>
                   <Badge
                     variant="secondary"
-                    className={`${isDark ? "glass" : "neu"} border-0 text-muted-foreground text-xs`}
+                    className={`${isDark ? "glass" : "neu"} border-0 text-muted-foreground text-sm px-3 py-1`}
                   >
                     {results.productInfo.reviewCount?.toLocaleString("ru-RU")}{" "}
                     отзывов
                   </Badge>
                 </div>
 
-                {/* Price */}
-                <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
+                {/* Price - Unified typography */}
+                <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-6">
                   {formatCurrency(results.productInfo.price)}
                 </div>
               </CardHeader>
 
-              <CardContent className="pt-0 space-y-6 sm:mb-5">
-                {/* Action Buttons */}
+              <CardContent className="p-6 pt-0 space-y-8">
+                {/* Action Buttons - Unified height and spacing */}
                 <motion.div
                   variants={itemVariants}
-                  className="grid grid-cols-2 gap-3"
+                  className="grid grid-cols-2 gap-4"
                 >
                   <Button
                     variant="outline"
-                    className={`h-10 text-sm ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
+                    className={`h-12 text-sm ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
                   >
-                    <Info className="w-4 h-4 mr-2" />
-                    Подробности
+                    <Share2 className="w-4 h-4 mr-2" />
+                    Поделиться
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className={`h-12 text-sm ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Экспорт
                   </Button>
                 </motion.div>
 
-                {/* Detailed Breakdown */}
-                <motion.div variants={itemVariants} className="space-y-4">
+                {/* Detailed Breakdown - Unified spacing */}
+                <motion.div variants={itemVariants} className="space-y-6">
                   {/* Logistics Details */}
-                  <div
-                    className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg sm:flex sm:flex-col sm:items-stretch`}
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-gradient-accent rounded-lg relative">
+                  <div className={`p-6 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center relative">
                         <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                        <TrendingUp className="w-4 h-4 text-white relative z-10" />
+                        <TrendingUp className="w-5 h-5 text-white relative z-10" />
                       </div>
-                      <h4 className="font-semibold text-foreground">
+                      <h4 className="text-lg font-semibold text-foreground">
                         Логистика
                       </h4>
                     </div>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
+                    <div className="space-y-4 text-sm">
+                      <div className="flex justify-between items-center">
                         <span className="text-muted-foreground">Доставка:</span>
-                        <span className="font-medium text-blue-500">
+                        <span className="font-semibold text-blue-500">
                           {formatCurrency(results.logistics.deliveryCost)}
                         </span>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <span className="text-muted-foreground">Хранение:</span>
-                        <span className="font-medium text-green-500">
+                        <span className="font-semibold text-green-500">
                           {formatCurrency(results.logistics.storageCost)}
                         </span>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <span className="text-muted-foreground">Возврат:</span>
-                        <span className="font-medium text-orange-500">
+                        <span className="font-semibold text-orange-500">
                           {formatCurrency(results.logistics.returnCost)}
                         </span>
                       </div>
-                      <Separator className="my-2 opacity-50" />
-                      <div className="flex justify-between font-semibold">
+                      <Separator className="my-3 opacity-50" />
+                      <div className="flex justify-between items-center font-semibold text-base">
                         <span className="text-foreground">Итого:</span>
                         <span className="text-green-500">
                           {formatCurrency(results.logistics.totalExpenses)}
@@ -296,50 +312,50 @@ const CalculatorResults = () => {
                   </div>
 
                   {/* Commissions Details */}
-                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-gradient-secondary rounded-lg relative">
+                  <div className={`p-6 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-gradient-secondary rounded-lg flex items-center justify-center relative">
                         <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                        <CreditCard className="w-4 h-4 text-white relative z-10" />
+                        <CreditCard className="w-5 h-5 text-white relative z-10" />
                       </div>
-                      <h4 className="font-semibold text-foreground">
+                      <h4 className="text-lg font-semibold text-foreground">
                         Комиссии
                       </h4>
                     </div>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
+                    <div className="space-y-4 text-sm">
+                      <div className="flex justify-between items-start">
                         <div>
-                          <div className="text-muted-foreground">
-                            Маркетплейс:
+                          <div className="text-muted-foreground font-medium">
+                            Маркетплейс
                           </div>
                           <div className="text-xs text-muted-foreground">
                             ({results.commissions.marketplaceCommissionPercent}
                             %)
                           </div>
                         </div>
-                        <span className="font-medium text-red-500">
+                        <span className="font-semibold text-red-500">
                           {formatCurrency(
                             results.commissions.marketplaceCommission,
                           )}
                         </span>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-start">
                         <div>
-                          <div className="text-muted-foreground">
-                            Поставщик:
+                          <div className="text-muted-foreground font-medium">
+                            Поставщик
                           </div>
                           <div className="text-xs text-muted-foreground">
                             ({results.commissions.supplierCommissionPercent}%)
                           </div>
                         </div>
-                        <span className="font-medium text-purple-500">
+                        <span className="font-semibold text-purple-500">
                           {formatCurrency(
                             results.commissions.supplierCommission,
                           )}
                         </span>
                       </div>
-                      <Separator className="my-2 opacity-50" />
-                      <div className="flex justify-between font-semibold">
+                      <Separator className="my-3 opacity-50" />
+                      <div className="flex justify-between items-center font-semibold text-base">
                         <span className="text-foreground">Итого:</span>
                         <span className="text-purple-500">
                           {formatCurrency(
@@ -347,6 +363,27 @@ const CalculatorResults = () => {
                               results.commissions.supplierCommission,
                           )}
                         </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Total Summary */}
+                  <div
+                    className={`p-6 ${isDark ? "glass-intense" : "neu-inset"} rounded-lg`}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h4 className="text-lg font-bold text-foreground">
+                          Общие ��атраты
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          Логистика + комиссии
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                          {formatCurrency(totalCosts)}
+                        </div>
                       </div>
                     </div>
                   </div>
