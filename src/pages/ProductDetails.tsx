@@ -5,25 +5,14 @@ import {
   Package,
   Star,
   Eye,
-  Heart,
-  Share2,
   Moon,
   Sun,
   Sparkles,
-  ShoppingCart,
-  Truck,
-  Shield,
-  Award,
-  MapPin,
-  Calendar,
-  Users,
-  TrendingUp,
   BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ProductInfo } from "@/types/calculator";
 
@@ -63,11 +52,6 @@ const ProductDetails = () => {
     brand: "Layers",
     description:
       "Протеиновые батончики Layers - это идеальный выбор для тех, кто следит за своим здоровьем и фигурой. Без добавления сахара, с высоким содержанием белка и отличным вкусом.",
-    images: [
-      "/api/placeholder/400/400",
-      "/api/placeholder/400/400",
-      "/api/placeholder/400/400",
-    ],
     specifications: {
       "Вес упаковки": "240 г (4 x 60 г)",
       "Содержание белка": "20 г на батончик",
@@ -81,21 +65,6 @@ const ProductDetails = () => {
       inStock: true,
       remainingCount: 156,
       warehouses: ["Москва", "СПб", "Казань", "Екатеринбург"],
-    },
-    seller: {
-      id: "seller_123",
-      name: "ООО Спортивное питание",
-      type: "company",
-      rating: 4.9,
-      reviewCount: 12847,
-      registrationDate: "2019-03-15",
-      totalProducts: 486,
-      verificationStatus: "verified",
-      location: {
-        country: "Россия",
-        city: "Москва",
-        region: "Московская область",
-      },
     },
   };
 
@@ -216,83 +185,73 @@ const ProductDetails = () => {
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col justify-start pt-8 p-4 max-w-md mx-auto">
         <motion.div
-          className="w-full space-y-6"
+          className="w-full sm:flex sm:flex-col"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Product Header */}
           <motion.div variants={itemVariants}>
             <Card className="glass-card border-0 shadow-xl">
-              <CardHeader className="text-center relative p-6">
-                <motion.div
-                  className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-secondary opacity-90 rounded-2xl" />
-                  <Package className="w-8 h-8 text-white relative z-10" />
-                </motion.div>
+              <CardContent className="p-6 sm:m-auto sm:-mb-[5px]">
+                {/* New horizontal layout */}
+                <div className="flex flex-row">
+                  <div className="flex flex-row">
+                    {/* Product Icon - moved to left */}
+                    <div
+                      className={`w-16 h-16 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden mb-4 sm:p-[30px]`}
+                    >
+                      <Package className="w-8 h-8 text-white relative z-10" />
+                    </div>
 
-                <CardTitle className="text-xl font-bold text-foreground mb-3 leading-tight">
-                  {product.title}
-                </CardTitle>
+                    {/* Content area */}
+                    <div className="flex items-center justify-center gap-3 mt-1.5 sm:justify-end sm:items-center sm:ml-auto">
+                      {/* Rating */}
+                      <div
+                        className={`flex items-center gap-1 ${isDark ? "glass" : "neu"} rounded-full px-3 py-2 sm:flex sm:flex-row sm:justify-end sm:items-center sm:m-auto sm:ml-auto`}
+                      >
+                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                        <span className="text-yellow-400 text-sm font-medium">
+                          {product.rating}
+                        </span>
+                      </div>
 
-                <div className="flex items-center justify-center gap-3 mb-4">
-                  <div
-                    className={`flex items-center gap-1 ${isDark ? "glass" : "neu"} rounded-full px-3 py-2`}
-                  >
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="text-yellow-400 text-sm font-medium">
-                      {product.rating}
-                    </span>
+                      {/* Price */}
+                      <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mt-1.5">
+                        {formatCurrency(product.price)}
+                      </div>
+
+                      {/* Reviews */}
+                      <Badge
+                        variant="secondary"
+                        className={`${isDark ? "glass" : "neu"} border-0 text-sm px-3 py-1 sm:flex sm:flex-row sm:flex-wrap sm:justify-center sm:items-end sm:mt-auto`}
+                      >
+                        {product.reviewCount?.toLocaleString("ru-RU")} отзывов
+                      </Badge>
+                    </div>
                   </div>
-                  <Badge
-                    variant="secondary"
-                    className={`${isDark ? "glass" : "neu"} border-0 text-sm px-3 py-1`}
-                  >
-                    {product.reviewCount?.toLocaleString("ru-RU")} отзывов
-                  </Badge>
                 </div>
 
-                <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-6">
-                  {formatCurrency(product.price)}
-                </div>
+                {/* Product Title - moved above and left-aligned */}
+                <h5 className="text-xl font-bold leading-[25px] mt-1.5 sm:mr-auto sm:text-left sm:text-sm">
+                  {product.title}
+                </h5>
+              </CardContent>
 
-                {/* Action Buttons */}
-                <div className="grid grid-cols-3 gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className={`h-10 text-xs ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
-                  >
-                    <Heart className="w-3 h-3 mr-1" />В избранное
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className={`h-10 text-xs ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
-                  >
-                    <Share2 className="w-3 h-3 mr-1" />
-                    Поделиться
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className={`h-10 text-xs ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
-                  >
-                    <BarChart3 className="w-3 h-3 mr-1" />
-                    Аналитика
-                  </Button>
-                </div>
-              </CardHeader>
+              {/* Analytics Button - moved outside */}
+              <Button
+                variant="outline"
+                className={`h-10 text-xs mx-6 mb-6 sm:mt-[22px] ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
+              >
+                <BarChart3 className="w-4 h-4 mr-1" />
+                Аналитика
+              </Button>
             </Card>
           </motion.div>
 
-          {/* Product Info */}
-          <motion.div variants={itemVariants}>
+          {/* Product Info Card */}
+          <motion.div variants={itemVariants} className="mt-6">
             <Card className="glass-card border-0 shadow-xl">
-              <CardContent className="p-6 space-y-6">
+              <CardContent className="p-6">
                 {/* Basic Info */}
                 <div>
                   <div className="flex items-center gap-3 mb-4">
@@ -306,77 +265,24 @@ const ProductDetails = () => {
                   </div>
 
                   <div className="space-y-3 text-sm">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between mt-3">
                       <span className="text-muted-foreground">Артикул:</span>
                       <span className="font-medium text-foreground">
                         {product.articleId}
                       </span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between mt-3">
                       <span className="text-muted-foreground">Бренд:</span>
                       <span className="font-medium text-foreground">
                         {product.brand}
                       </span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between mt-3">
                       <span className="text-muted-foreground">Категория:</span>
                       <span className="font-medium text-foreground">
                         {product.category}
                       </span>
                     </div>
-                  </div>
-                </div>
-
-                <Separator className="opacity-50" />
-
-                {/* Availability */}
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 bg-gradient-accent rounded-lg flex items-center justify-center relative">
-                      <div className="absolute inset-0 rounded-lg border border-white/30" />
-                      <Truck className="w-4 h-4 text-white relative z-10" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-foreground">
-                      Наличие
-                    </h4>
-                  </div>
-
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Статус:</span>
-                      <Badge
-                        variant={
-                          product.availability?.inStock
-                            ? "default"
-                            : "destructive"
-                        }
-                        className="text-xs"
-                      >
-                        {product.availability?.inStock
-                          ? "В наличии"
-                          : "Нет в наличии"}
-                      </Badge>
-                    </div>
-                    {product.availability?.remainingCount && (
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Остаток:</span>
-                        <span className="font-medium text-foreground">
-                          {product.availability.remainingCount} шт.
-                        </span>
-                      </div>
-                    )}
-                    {product.availability?.warehouses && (
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Склады:</span>
-                        <span className="font-medium text-foreground text-right">
-                          {product.availability.warehouses
-                            .slice(0, 2)
-                            .join(", ")}
-                          {product.availability.warehouses.length > 2 &&
-                            ` +${product.availability.warehouses.length - 2}`}
-                        </span>
-                      </div>
-                    )}
                   </div>
                 </div>
               </CardContent>
@@ -385,13 +291,13 @@ const ProductDetails = () => {
 
           {/* Specifications */}
           {product.specifications && (
-            <motion.div variants={itemVariants}>
+            <motion.div variants={itemVariants} className="mt-6">
               <Card className="glass-card border-0 shadow-xl">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-8 h-8 bg-gradient-secondary rounded-lg flex items-center justify-center relative">
                       <div className="absolute inset-0 rounded-lg border border-white/30" />
-                      <Award className="w-4 h-4 text-white relative z-10" />
+                      <Eye className="w-4 h-4 text-white relative z-10" />
                     </div>
                     <h4 className="text-lg font-semibold text-foreground">
                       Характеристики
@@ -417,7 +323,7 @@ const ProductDetails = () => {
 
           {/* Description */}
           {product.description && (
-            <motion.div variants={itemVariants}>
+            <motion.div variants={itemVariants} className="mt-6">
               <Card className="glass-card border-0 shadow-xl">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-6">
@@ -433,77 +339,6 @@ const ProductDetails = () => {
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {product.description}
                   </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          )}
-
-          {/* Seller Info */}
-          {product.seller && (
-            <motion.div variants={itemVariants}>
-              <Card className="glass-card border-0 shadow-xl">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-8 h-8 bg-gradient-accent rounded-lg flex items-center justify-center relative">
-                      <div className="absolute inset-0 rounded-lg border border-white/30" />
-                      <Users className="w-4 h-4 text-white relative z-10" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-foreground">
-                      Продавец
-                    </h4>
-                    {product.seller.verificationStatus === "verified" && (
-                      <Badge variant="default" className="text-xs">
-                        <Shield className="w-3 h-3 mr-1" />
-                        Проверен
-                      </Badge>
-                    )}
-                  </div>
-
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Название:</span>
-                      <span className="font-medium text-foreground">
-                        {product.seller.name}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Рейтинг:</span>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                        <span className="font-medium text-foreground">
-                          {product.seller.rating}
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          ({product.seller.reviewCount})
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Товаров:</span>
-                      <span className="font-medium text-foreground">
-                        {product.seller.totalProducts}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Локация:</span>
-                      <span className="font-medium text-foreground">
-                        {product.seller.location.city}
-                      </span>
-                    </div>
-                  </div>
-
-                  <Button
-                    variant="outline"
-                    className={`w-full h-12 text-sm mt-4 ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
-                    onClick={() =>
-                      navigate("/seller-details", {
-                        state: { seller: product.seller },
-                      })
-                    }
-                  >
-                    <Users className="w-4 h-4 mr-2" />
-                    Подробнее о продавце
-                  </Button>
                 </CardContent>
               </Card>
             </motion.div>
