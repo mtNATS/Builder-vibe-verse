@@ -110,7 +110,7 @@ const Index = () => {
         {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
       </motion.button>
 
-      {/* Main Content - More compact layout */}
+      {/* Main Content - Unified layout */}
       <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
@@ -118,11 +118,11 @@ const Index = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* Compact Header Section */}
-          <motion.div variants={itemVariants} className="text-center mb-6">
+          {/* Main Header Section - Unified spacing */}
+          <motion.div variants={itemVariants} className="mb-8">
             <Card className="glass-card border-0 shadow-xl">
-              <CardHeader className="pb-4 pt-6">
-                {/* Sparkle */}
+              <CardHeader className="text-center relative p-6">
+                {/* Sparkle decoration */}
                 <motion.div
                   className="absolute -top-2 -right-2"
                   animate={{
@@ -137,9 +137,9 @@ const Index = () => {
                   <Sparkles className="w-4 h-4 text-primary opacity-60" />
                 </motion.div>
 
-                {/* Logo */}
+                {/* Logo - Unified size */}
                 <motion.div
-                  className={`w-16 h-16 mx-auto mb-4 rounded-full ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
+                  className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   style={{
@@ -192,18 +192,16 @@ const Index = () => {
                   </svg>
                 </motion.div>
 
-                {/* Compact Title */}
-                <CardTitle className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
+                {/* Title - Unified typography */}
+                <CardTitle className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-3">
                   Fusion Starter
                 </CardTitle>
-                <CardDescription className="text-sm text-muted-foreground">
+                <CardDescription className="text-sm text-muted-foreground mb-6">
                   Калькулятор логистических затрат
                 </CardDescription>
-              </CardHeader>
 
-              <CardContent className="pt-0 pb-6">
-                {/* Enhanced Main CTA Button with Neumorphism */}
-                <motion.div variants={itemVariants} className="mb-4">
+                {/* Main CTA Button - Unified height */}
+                <motion.div variants={itemVariants} className="mb-6">
                   <Button
                     onClick={handleStartCalculation}
                     className={`w-full h-12 text-base font-semibold border-0 shadow-lg transition-all duration-200 group relative overflow-hidden ${
@@ -225,64 +223,59 @@ const Index = () => {
                   </Button>
                 </motion.div>
 
-                {/* Compact Feature Cards with outlined icons */}
+                {/* Feature Cards - Unified spacing and sizing */}
                 <motion.div
-                  className="grid grid-cols-2 gap-3"
+                  className="grid grid-cols-2 gap-4 mb-6"
                   variants={itemVariants}
                 >
                   <motion.div
-                    className={`p-3 ${isDark ? "glass" : "neu"} rounded-lg text-center cursor-pointer group`}
+                    className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg text-center cursor-pointer group`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gradient-accent flex items-center justify-center relative">
-                      {/* Icon outline */}
+                    <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-accent flex items-center justify-center relative">
                       <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                      <TrendingUp className="w-4 h-4 text-white relative z-10" />
+                      <TrendingUp className="w-5 h-5 text-white relative z-10" />
                     </div>
-                    <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors">
+                    <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
                       Точные расчеты
                     </p>
                   </motion.div>
 
                   <motion.div
-                    className={`p-3 ${isDark ? "glass" : "neu"} rounded-lg text-center cursor-pointer group`}
+                    className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg text-center cursor-pointer group`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gradient-secondary flex items-center justify-center relative">
-                      {/* Icon outline */}
+                    <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-secondary flex items-center justify-center relative">
                       <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                      <Calculator className="w-4 h-4 text-white relative z-10" />
+                      <Calculator className="w-5 h-5 text-white relative z-10" />
                     </div>
-                    <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors">
+                    <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
                       Быстрые результаты
                     </p>
                   </motion.div>
                 </motion.div>
 
-                {/* Compact Additional Info */}
+                {/* Additional Info - Unified styling */}
                 <motion.div
                   variants={itemVariants}
-                  className={`p-3 ${isDark ? "glass" : "neu-inset"} rounded-lg mt-4`}
+                  className={`p-4 ${isDark ? "glass" : "neu-inset"} rounded-lg`}
                 >
-                  <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
+                  <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
                     <motion.div
                       animate={{ scale: [1, 1.1, 1] }}
                       transition={{ duration: 3, repeat: Infinity }}
                     >
-                      <Sparkles className="w-3 h-3 text-primary" />
+                      <Sparkles className="w-4 h-4 text-primary" />
                     </motion.div>
                     <span>Современный интерфейс с Glassmorphism</span>
                   </div>
                 </motion.div>
-              </CardContent>
+              </CardHeader>
             </Card>
           </motion.div>
         </motion.div>
-
-        {/* Additional styled element */}
-        <div className="glass rounded-lg p-4" />
       </div>
     </div>
   );
