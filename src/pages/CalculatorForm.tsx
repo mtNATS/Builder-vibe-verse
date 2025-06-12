@@ -145,7 +145,7 @@ const CalculatorForm = () => {
       </motion.div>
 
       {/* Main Content - Unified layout */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
+      <div className="relative z-10 min-h-screen flex flex-col justify-start pt-8 p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
           variants={containerVariants}
@@ -191,7 +191,7 @@ const CalculatorForm = () => {
                     <div className="space-y-6">
                       <div>
                         <Label className="text-muted-foreground text-sm mb-3 block font-medium">
-                          Артикул или ссылка
+                          Арт��кул или ссылка
                         </Label>
                         <Input
                           placeholder="Введите артикул товара или ссылку"
