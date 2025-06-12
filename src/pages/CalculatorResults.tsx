@@ -8,6 +8,9 @@ import {
   Package,
   CreditCard,
   Info,
+  Sparkles,
+  Target,
+  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -38,16 +41,19 @@ const CalculatorResults = () => {
       label: "Стоимость доставки",
       value: results.logistics.deliveryCost,
       color: "text-blue-400",
+      icon: Package,
     },
     {
       label: "Стоимость хранения",
       value: results.logistics.storageCost,
       color: "text-green-400",
+      icon: TrendingUp,
     },
     {
       label: "Стоимость возврата",
       value: results.logistics.returnCost,
       color: "text-orange-400",
+      icon: TrendingDown,
     },
   ];
 
@@ -57,24 +63,96 @@ const CalculatorResults = () => {
       value: results.commissions.marketplaceCommission,
       percent: results.commissions.marketplaceCommissionPercent,
       color: "text-red-400",
+      icon: CreditCard,
     },
     {
       label: "Комиссия поставщика",
       value: results.commissions.supplierCommission,
       percent: results.commissions.supplierCommissionPercent,
       color: "text-purple-400",
+      icon: Target,
     },
   ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 dark">
-      <div className="relative min-h-screen max-w-md mx-auto">
-        {/* Background Effects */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-purple-500/10 blur-3xl"></div>
-        </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
+  const totalCosts =
+    results.logistics.totalExpenses +
+    results.commissions.marketplaceCommission +
+    results.commissions.supplierCommission;
+
+  return (
+    <div className="min-h-screen morph-bg relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-accent opacity-20 blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-secondary opacity-15 blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, 50, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 5,
+          }}
+        />
+
+        {/* Success particles */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-green-400/60 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -50, 0],
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0],
+            }}
+            transition={{
+              duration: 2 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative min-h-screen max-w-md mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -86,51 +164,93 @@ const CalculatorResults = () => {
               variant="ghost"
               size="icon"
               onClick={goBack}
-              className="text-white hover:bg-white/10 rounded-full"
+              className="glass-button text-white hover:bg-white/20 rounded-full hover-lift"
             >
               <ArrowLeft className="w-5 h-5" />
             </Button>
-            <h1 className="text-xl font-semibold text-white">Результаты</h1>
-            <div className="w-10"></div>
+            <motion.h1
+              className="text-xl font-semibold text-white text-glow-soft"
+              animate={{
+                textShadow: [
+                  "0 0 10px rgba(255,255,255,0.5)",
+                  "0 0 20px rgba(34,197,94,0.5)",
+                  "0 0 10px rgba(255,255,255,0.5)",
+                ],
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              Результаты расчета
+            </motion.h1>
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <Sparkles className="w-5 h-5 text-green-400" />
+            </motion.div>
           </div>
         </motion.div>
 
         {/* Content */}
-        <div className="relative z-10 px-6 pb-6 space-y-6">
+        <motion.div
+          className="relative z-10 px-6 pb-6 space-y-6 custom-scrollbar"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Product Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-          >
-            <Card className="bg-white/5 backdrop-blur-sm border-white/10">
-              <CardContent className="p-4">
+          <motion.div variants={itemVariants}>
+            <Card className="glass-card border-0 hover-lift">
+              <CardContent className="p-6">
                 <div className="flex gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-400 via-pink-400 to-purple-500 rounded-xl flex items-center justify-center shrink-0">
-                    <Package className="w-8 h-8 text-white" />
-                  </div>
+                  <motion.div
+                    className="w-16 h-16 bg-gradient-secondary rounded-2xl flex items-center justify-center shrink-0 relative overflow-hidden"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Package className="w-8 h-8 text-white relative z-10" />
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-2xl"
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 10, repeat: Infinity }}
+                    />
+                  </motion.div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-white font-medium text-sm leading-tight mb-2">
+                    <h3 className="text-white font-medium text-sm leading-tight mb-3">
                       {results.productInfo.title}
                     </h3>
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-3 mb-3">
+                      <motion.div
+                        className="flex items-center gap-1 glass rounded-full px-2 py-1"
+                        whileHover={{ scale: 1.05 }}
+                      >
                         <Star className="w-3 h-3 text-yellow-400 fill-current" />
                         <span className="text-yellow-400 text-sm font-medium">
                           {results.productInfo.rating}
                         </span>
-                      </div>
-                      <span className="text-white/60 text-sm">
-                        (
+                      </motion.div>
+                      <Badge
+                        variant="secondary"
+                        className="glass border-white/20 text-white/80"
+                      >
                         {results.productInfo.reviewCount?.toLocaleString(
                           "ru-RU",
-                        )}
-                        )
-                      </span>
+                        )}{" "}
+                        отзывов
+                      </Badge>
                     </div>
-                    <div className="text-blue-400 text-xl font-bold">
+                    <motion.div
+                      className="text-blue-400 text-2xl font-bold text-glow"
+                      animate={{
+                        textShadow: [
+                          "0 0 10px rgba(59,130,246,0.5)",
+                          "0 0 20px rgba(59,130,246,0.8)",
+                          "0 0 10px rgba(59,130,246,0.5)",
+                        ],
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
                       {formatCurrency(results.productInfo.price)}
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </CardContent>
@@ -139,144 +259,249 @@ const CalculatorResults = () => {
 
           {/* Action Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            variants={itemVariants}
             className="grid grid-cols-2 gap-3"
           >
-            <Button className="bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-sm">
+            <Button className="glass-button text-white border-white/20 backdrop-blur-sm hover-lift">
               <Package className="w-4 h-4 mr-2" />
-              Рассчитать логистику
+              Новый расчёт
             </Button>
-            <Button
-              variant="outline"
-              className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10"
-            >
+            <Button className="glass-button text-blue-400 border-blue-500/50 hover:bg-blue-500/10">
               <Info className="w-4 h-4 mr-2" />
-              Подробности товара
+              Подробности
             </Button>
           </motion.div>
 
           {/* Logistics Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <Card className="bg-white/5 backdrop-blur-sm border-white/10">
+          <motion.div variants={itemVariants}>
+            <Card className="glass-card border-0 hover-lift">
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-green-500/20 rounded-lg">
-                    <TrendingUp className="w-5 h-5 text-green-400" />
-                  </div>
-                  <CardTitle className="text-white">Логистика</CardTitle>
+                  <motion.div
+                    className="p-3 bg-gradient-accent rounded-xl"
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <TrendingUp className="w-5 h-5 text-white" />
+                  </motion.div>
+                  <CardTitle className="text-white text-lg">
+                    Логистика
+                  </CardTitle>
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 8, repeat: Infinity }}
+                  >
+                    <Target className="w-4 h-4 text-white/60" />
+                  </motion.div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                {logisticsItems.map((item, index) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 + index * 0.1 }}
-                    className="flex items-center justify-between"
-                  >
-                    <span className="text-white/80">{item.label}:</span>
-                    <span className={`font-semibold ${item.color}`}>
-                      {formatCurrency(item.value)}
-                    </span>
-                  </motion.div>
-                ))}
+                {logisticsItems.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <motion.div
+                      key={item.label}
+                      className="flex items-center justify-between p-3 glass rounded-xl hover-lift"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.4 + index * 0.1 }}
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <motion.div
+                          className={`p-2 bg-gradient-primary rounded-lg`}
+                          whileHover={{ rotate: 180 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <IconComponent className="w-4 h-4 text-white" />
+                        </motion.div>
+                        <span className="text-white/90">{item.label}:</span>
+                      </div>
+                      <motion.span
+                        className={`font-bold text-lg ${item.color} text-glow`}
+                        animate={{
+                          textShadow: [
+                            `0 0 10px ${item.color.includes("blue") ? "rgba(59,130,246,0.5)" : item.color.includes("green") ? "rgba(34,197,94,0.5)" : "rgba(251,146,60,0.5)"}`,
+                            `0 0 20px ${item.color.includes("blue") ? "rgba(59,130,246,0.8)" : item.color.includes("green") ? "rgba(34,197,94,0.8)" : "rgba(251,146,60,0.8)"}`,
+                            `0 0 10px ${item.color.includes("blue") ? "rgba(59,130,246,0.5)" : item.color.includes("green") ? "rgba(34,197,94,0.5)" : "rgba(251,146,60,0.5)"}`,
+                          ],
+                        }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      >
+                        {formatCurrency(item.value)}
+                      </motion.span>
+                    </motion.div>
+                  );
+                })}
+
                 <Separator className="bg-white/20 my-4" />
+
                 <motion.div
+                  className="flex items-center justify-between p-4 glass-intense rounded-xl"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.7 }}
-                  className="flex items-center justify-between font-semibold text-lg"
                 >
-                  <span className="text-white">Итого расходы:</span>
-                  <span className="text-red-400">
+                  <div className="flex items-center gap-3">
+                    <motion.div
+                      className="p-2 bg-gradient-secondary rounded-lg"
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    >
+                      <Zap className="w-5 h-5 text-white" />
+                    </motion.div>
+                    <span className="text-white font-semibold text-lg">
+                      Итого расходы:
+                    </span>
+                  </div>
+                  <motion.span
+                    className="text-red-400 font-bold text-xl text-glow"
+                    animate={{
+                      textShadow: [
+                        "0 0 10px rgba(248,113,113,0.5)",
+                        "0 0 20px rgba(248,113,113,0.8)",
+                        "0 0 10px rgba(248,113,113,0.5)",
+                      ],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
                     {formatCurrency(results.logistics.totalExpenses)}
-                  </span>
+                  </motion.span>
                 </motion.div>
               </CardContent>
             </Card>
           </motion.div>
 
           {/* Commissions Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <Card className="bg-white/5 backdrop-blur-sm border-white/10">
+          <motion.div variants={itemVariants}>
+            <Card className="glass-card border-0 hover-lift">
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-purple-500/20 rounded-lg">
-                    <CreditCard className="w-5 h-5 text-purple-400" />
-                  </div>
-                  <CardTitle className="text-white">Комиссии</CardTitle>
+                  <motion.div
+                    className="p-3 bg-gradient-secondary rounded-xl"
+                    whileHover={{ rotate: -360, scale: 1.1 }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <CreditCard className="w-5 h-5 text-white" />
+                  </motion.div>
+                  <CardTitle className="text-white text-lg">Комиссии</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                {commissionItems.map((item, index) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.8 + index * 0.1 }}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex flex-col">
-                      <span className="text-white/80">{item.label}:</span>
-                      <span className="text-white/60 text-sm">
-                        ({item.percent}%)
-                      </span>
-                    </div>
-                    <span className={`font-semibold ${item.color}`}>
-                      {formatCurrency(item.value)}
-                    </span>
-                  </motion.div>
-                ))}
+                {commissionItems.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <motion.div
+                      key={item.label}
+                      className="flex items-center justify-between p-3 glass rounded-xl hover-lift"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8 + index * 0.1 }}
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <motion.div
+                          className="p-2 bg-gradient-primary rounded-lg"
+                          whileHover={{ rotate: 360 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <IconComponent className="w-4 h-4 text-white" />
+                        </motion.div>
+                        <div className="flex flex-col">
+                          <span className="text-white/90">{item.label}:</span>
+                          <span className="text-white/60 text-sm">
+                            ({item.percent}%)
+                          </span>
+                        </div>
+                      </div>
+                      <motion.span
+                        className={`font-bold text-lg ${item.color} text-glow`}
+                        animate={{
+                          textShadow: [
+                            `0 0 10px ${item.color.includes("red") ? "rgba(248,113,113,0.5)" : "rgba(168,85,247,0.5)"}`,
+                            `0 0 20px ${item.color.includes("red") ? "rgba(248,113,113,0.8)" : "rgba(168,85,247,0.8)"}`,
+                            `0 0 10px ${item.color.includes("red") ? "rgba(248,113,113,0.5)" : "rgba(168,85,247,0.5)"}`,
+                          ],
+                        }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      >
+                        {formatCurrency(item.value)}
+                      </motion.span>
+                    </motion.div>
+                  );
+                })}
               </CardContent>
             </Card>
           </motion.div>
 
           {/* Summary Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border-blue-500/20">
-              <CardContent className="p-6">
+          <motion.div variants={itemVariants}>
+            <Card className="glass-intense border-0 relative overflow-hidden">
+              <motion.div
+                className="absolute inset-0 bg-gradient-primary opacity-10"
+                animate={{
+                  opacity: [0.1, 0.2, 0.1],
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+              <CardContent className="p-6 relative z-10">
                 <div className="text-center">
-                  <h3 className="text-white text-lg font-semibold mb-2">
-                    Общие затраты
-                  </h3>
-                  <div className="text-3xl font-bold text-red-400 mb-4">
-                    {formatCurrency(
-                      results.logistics.totalExpenses +
-                        results.commissions.marketplaceCommission +
-                        results.commissions.supplierCommission,
-                    )}
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <div className="text-white/60">Логистика</div>
-                      <div className="text-green-400 font-medium">
+                  <motion.div
+                    className="flex items-center justify-center gap-2 mb-4"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 1, type: "spring", bounce: 0.5 }}
+                  >
+                    <motion.div
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <Sparkles className="w-6 h-6 text-yellow-400" />
+                    </motion.div>
+                    <h3 className="text-white text-xl font-bold">
+                      Общие затраты
+                    </h3>
+                  </motion.div>
+
+                  <motion.div
+                    className="text-4xl font-bold text-red-400 mb-6 text-glow"
+                    animate={{
+                      scale: [1, 1.05, 1],
+                      textShadow: [
+                        "0 0 20px rgba(248,113,113,0.5)",
+                        "0 0 30px rgba(248,113,113,0.8)",
+                        "0 0 20px rgba(248,113,113,0.5)",
+                      ],
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    {formatCurrency(totalCosts)}
+                  </motion.div>
+
+                  <div className="grid grid-cols-2 gap-6">
+                    <motion.div
+                      className="glass rounded-xl p-4"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="text-white/70 text-sm mb-1">
+                        Логистика
+                      </div>
+                      <div className="text-green-400 font-bold text-lg text-glow">
                         {formatCurrency(results.logistics.totalExpenses)}
                       </div>
-                    </div>
-                    <div>
-                      <div className="text-white/60">Комиссии</div>
-                      <div className="text-purple-400 font-medium">
+                    </motion.div>
+                    <motion.div
+                      className="glass rounded-xl p-4"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="text-white/70 text-sm mb-1">Комиссии</div>
+                      <div className="text-purple-400 font-bold text-lg text-glow">
                         {formatCurrency(
                           results.commissions.marketplaceCommission +
                             results.commissions.supplierCommission,
                         )}
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </CardContent>
@@ -285,18 +510,29 @@ const CalculatorResults = () => {
 
           {/* New Calculation Button */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+            variants={itemVariants}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
             <Button
               onClick={() => navigate("/calculator/form")}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 font-medium"
+              className="w-full bg-gradient-primary hover:bg-gradient-secondary border-0 text-white h-14 font-bold text-lg relative overflow-hidden group pulse-glow"
             >
+              <Zap className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform duration-300" />
               Новый расчёт
+              <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                animate={{ x: [-100, 300] }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
             </Button>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
