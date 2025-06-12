@@ -197,7 +197,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                     boxShadow: [
                       "0 8px 32px -8px rgba(102, 126, 234, 0.4)",
                       "0 16px 48px -8px rgba(102, 126, 234, 0.6)",
-                      "0 8px 32px -8px rgba(102, 126, 234, 0.4)",
                     ],
                   }}
                 >
@@ -278,7 +277,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                           textShadow: [
                             "0 0 10px rgba(59,130,246,0.5)",
                             "0 0 20px rgba(59,130,246,0.8)",
-                            "0 0 10px rgba(59,130,246,0.5)",
                           ],
                         }}
                         transition={{ duration: 2, repeat: Infinity }}
