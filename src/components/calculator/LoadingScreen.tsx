@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -177,8 +177,8 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
         {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
       </motion.button>
 
-      {/* Main Content in Index page style */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center sm:justify-start sm:items-center p-4 max-w-md mx-auto">
+      {/* Main Content - Unified layout */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
           variants={containerVariants}
@@ -186,9 +186,9 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
           animate="visible"
         >
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0 shadow-xl sm:flex sm:flex-col">
-              {/* Loading Icon Header */}
-              <div className="text-center relative p-6 sm:pt-6 sm:justify-center sm:items-center sm:ml-auto">
+            <Card className="glass-card border-0 shadow-xl">
+              {/* Loading Icon Header - Unified spacing */}
+              <CardHeader className="text-center relative p-6">
                 <motion.div
                   className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
                   whileHover={{ scale: 1.02 }}
@@ -254,25 +254,26 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                   </svg>
                 </motion.div>
 
-                <h2 className="text-lg font-bold text-foreground mb-2 leading-tight">
+                {/* Title - Unified typography */}
+                <CardTitle className="text-xl font-bold text-foreground mb-3">
                   Анализ данных...
-                </h2>
+                </CardTitle>
 
-                <div className="text-sm text-muted-foreground mb-4">
+                <div className="text-sm text-muted-foreground mb-6">
                   Обработка параметров товара
                 </div>
-              </div>
+              </CardHeader>
 
-              <CardContent className="pt-0 space-y-6 sm:mb-5">
-                {/* Progress Section */}
+              <CardContent className="p-6 pt-0 space-y-8">
+                {/* Progress Section - Unified spacing */}
                 <motion.div variants={itemVariants}>
-                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
-                    <div className="flex items-center justify-between mb-3">
+                  <div className={`p-6 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center justify-between mb-4">
                       <span className="text-muted-foreground text-sm font-medium">
                         Прогресс анализа
                       </span>
                       <motion.span
-                        className="text-primary text-base font-bold"
+                        className="text-primary text-lg font-bold"
                         animate={{
                           textShadow: [
                             "0 0 10px rgba(59,130,246,0.5)",
@@ -288,7 +289,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                     {/* Custom Progress Bar */}
                     <div className="relative">
                       <div
-                        className={`h-2 ${isDark ? "glass" : "neu-inset"} rounded-full overflow-hidden`}
+                        className={`h-3 ${isDark ? "glass" : "neu-inset"} rounded-full overflow-hidden`}
                       >
                         <motion.div
                           className="h-full bg-gradient-primary rounded-full relative overflow-hidden"
@@ -310,12 +311,12 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                   </div>
                 </motion.div>
 
-                {/* Current Step Display */}
+                {/* Current Step Display - Unified spacing */}
                 <motion.div variants={itemVariants}>
-                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
-                    <div className="flex items-center gap-3 mb-3">
+                  <div className={`p-6 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center gap-3 mb-4">
                       <motion.div
-                        className="p-2 bg-gradient-accent rounded-lg relative"
+                        className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center relative"
                         animate={{
                           scale: [1, 1.1, 1],
                         }}
@@ -326,10 +327,10 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                       >
                         <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
                         {React.createElement(currentStepData.icon, {
-                          className: "w-4 h-4 text-white relative z-10",
+                          className: "w-5 h-5 text-white relative z-10",
                         })}
                       </motion.div>
-                      <h4 className="font-semibold text-foreground">
+                      <h4 className="text-lg font-semibold text-foreground">
                         Текущий этап
                       </h4>
                       <motion.div
@@ -341,7 +342,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                     </div>
 
                     <motion.p
-                      className={`${currentStepData.color} font-medium text-sm`}
+                      className={`${currentStepData.color} font-medium text-base`}
                       key={currentStep}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -352,24 +353,24 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                   </div>
                 </motion.div>
 
-                {/* Steps Indicator */}
+                {/* Steps Indicator - Unified spacing */}
                 <motion.div variants={itemVariants}>
-                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-gradient-secondary rounded-lg relative">
+                  <div className={`p-6 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-gradient-secondary rounded-lg flex items-center justify-center relative">
                         <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                        <Calculator className="w-4 h-4 text-white relative z-10" />
+                        <Calculator className="w-5 h-5 text-white relative z-10" />
                       </div>
-                      <h4 className="font-semibold text-foreground">
+                      <h4 className="text-lg font-semibold text-foreground">
                         Этапы обработки
                       </h4>
                     </div>
 
-                    <div className="flex justify-center gap-3">
+                    <div className="flex justify-center gap-4">
                       {steps.map((step, index) => (
                         <motion.div
                           key={index}
-                          className={`relative p-3 rounded-lg transition-all duration-500 ${
+                          className={`relative p-4 rounded-lg transition-all duration-500 ${
                             currentStep >= index
                               ? isDark
                                 ? "glass"
@@ -388,7 +389,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                           <div className="relative">
                             <div className="absolute inset-0 rounded-lg border border-white/30" />
                             {React.createElement(step.icon, {
-                              className: `w-4 h-4 ${
+                              className: `w-5 h-5 ${
                                 currentStep >= index
                                   ? step.color
                                   : "text-muted-foreground"
@@ -415,14 +416,14 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
                   </div>
                 </motion.div>
 
-                {/* Cancel Button */}
+                {/* Cancel Button - Unified height */}
                 <motion.div variants={itemVariants}>
                   <Button
                     variant="outline"
                     onClick={onCancel}
-                    className={`w-full h-10 text-sm ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
+                    className={`w-full h-12 text-base ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
                   >
-                    <Zap className="w-4 h-4 mr-2" />
+                    <Zap className="w-5 h-5 mr-2" />
                     Отменить
                   </Button>
                 </motion.div>
