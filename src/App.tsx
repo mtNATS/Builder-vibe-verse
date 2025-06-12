@@ -8,6 +8,10 @@ import Calculator from "./pages/Calculator";
 import CalculatorForm from "./pages/CalculatorForm";
 import CalculatorLoading from "./pages/CalculatorLoading";
 import CalculatorResults from "./pages/CalculatorResults";
+import CalculationHistory from "./pages/CalculationHistory";
+import ProductDetails from "./pages/ProductDetails";
+import SellerDetails from "./pages/SellerDetails";
+import Feedback from "./pages/Feedback";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
