@@ -161,7 +161,7 @@ const Index = () => {
                     backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
                   }}
                 >
-                  {/* Final Clean Logo */}
+                  {/* Accurate Logo Replica */}
                   <svg
                     width="50"
                     height="50"
@@ -178,55 +178,42 @@ const Index = () => {
                       strokeWidth="3"
                     />
 
-                    {/* Vertical stem */}
+                    {/* Vertical stem of 't' */}
                     <rect
                       x="30"
-                      y="18"
+                      y="20"
                       width="8"
-                      height="64"
+                      height="60"
                       rx="4"
                       fill="white"
                     />
 
-                    {/* Flowing horizontal banner */}
+                    {/* Flowing banner/ribbon */}
                     <path
-                      d="M24 32
-                         C 23 30 24 28 26 28
-                         L 84 32
-                         C 86 33 86 35 84 36
-                         C 82 37 78 37 74 36
-                         L 62 34
-                         C 54 32 46 31 38 30
-                         L 30 29
-                         C 27 29 25 30 24 32 Z"
+                      d="M22 32
+                         C 21 30 22 28 24 28
+                         L 82 30
+                         C 85 30.5 86 32.5 85 35
+                         C 84 37.5 81 39 78 39
+                         C 74 39 69 38 64 36.5
+                         C 58 35 52 33.5 46 32
+                         C 40 30.5 34 29.5 28 29
+                         C 25 28.5 23 29.5 22 32 Z"
                       fill="white"
                     />
 
-                    {/* Banner shadow/depth */}
-                    <path
-                      d="M30 34
-                         L 75 36
-                         C 77 36.5 77 37.5 75 38
-                         C 73 38.5 69 38 65 37
-                         L 55 35
-                         C 47 34 39 33.5 31 33.5
-                         C 30 33.5 30 34 30 34 Z"
-                      fill="white"
-                      opacity="0.7"
-                    />
-
-                    {/* Bottom base */}
+                    {/* Bottom horizontal base */}
                     <rect
                       x="30"
                       y="70"
-                      width="40"
+                      width="38"
                       height="8"
                       rx="4"
                       fill="white"
                     />
 
-                    {/* Rounded end */}
-                    <circle cx="70" cy="74" r="4" fill="white" />
+                    {/* Rounded end cap */}
+                    <circle cx="68" cy="74" r="4" fill="white" />
                   </svg>
                 </motion.div>
 
