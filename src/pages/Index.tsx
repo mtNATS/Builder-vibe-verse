@@ -120,7 +120,14 @@ const Index = () => {
       </motion.button>
 
       {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-6">
+      <div
+        className="relative z-10 min-h-screen flex items-center justify-center p-6"
+        style={{
+          "@media (max-width: 640px)": {
+            minHeight: "102px",
+          },
+        }}
+      >
         <motion.div
           className="w-full max-w-md"
           variants={containerVariants}
@@ -145,23 +152,44 @@ const Index = () => {
                   <Sparkles className="w-4 h-4 text-primary opacity-60" />
                 </motion.div>
 
-                {/* App Icon with refined effects */}
+                {/* Custom Logo */}
                 <motion.div
-                  className={`w-20 h-20 mx-auto mb-6 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
+                  className={`w-20 h-20 mx-auto mb-6 rounded-full ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  style={{
+                    backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
+                  }}
                 >
-                  <div className="absolute inset-0 bg-gradient-primary opacity-80 rounded-2xl" />
-                  <motion.div
-                    animate={{ rotate: [0, 360] }}
-                    transition={{
-                      duration: 15,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
+                  {/* Custom Logo SVG */}
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 100 100"
+                    className="relative z-10"
                   >
-                    <Calculator className="w-10 h-10 text-white relative z-10" />
-                  </motion.div>
+                    {/* Outer circle */}
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="48"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="4"
+                    />
+
+                    {/* Custom character/symbol - based on the logo design */}
+                    <path
+                      d="M35 25 L65 25 Q70 25 70 30 L70 45 Q70 50 65 50 L50 50 L50 65 Q50 70 45 70 L35 70 Q30 70 30 65 L30 30 Q30 25 35 25 Z"
+                      fill="white"
+                    />
+
+                    {/* Additional detail - flowing element */}
+                    <path
+                      d="M45 35 Q55 40 65 35 Q60 45 50 40 Q40 45 35 35 Q45 30 45 35 Z"
+                      fill="rgb(156, 163, 175)"
+                    />
+                  </svg>
                 </motion.div>
 
                 {/* Title */}
@@ -179,72 +207,74 @@ const Index = () => {
                   </CardDescription>
                 </motion.div>
               </CardHeader>
-
-              <CardContent className="space-y-6">
-                {/* Main CTA Button */}
-                <motion.div variants={itemVariants}>
-                  <Button
-                    onClick={() => navigate("/calculator")}
-                    className="w-full h-14 text-lg font-semibold bg-gradient-primary hover:bg-gradient-secondary border-0 shadow-lg transition-all duration-200 group"
-                    size="lg"
-                  >
-                    <Package className="w-5 h-5 mr-3 group-hover:rotate-6 transition-transform duration-200" />
-                    Калькулятор Wildberries
-                    <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-0.5 transition-transform duration-200" />
-                  </Button>
-                </motion.div>
-
-                {/* Feature Cards - simplified hover effects */}
-                <motion.div
-                  className="grid grid-cols-2 gap-4"
-                  variants={itemVariants}
-                >
-                  <motion.div
-                    className={`p-4 ${isDark ? "glass" : "neu"} rounded-xl text-center cursor-pointer group`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-accent flex items-center justify-center">
-                      <TrendingUp className="w-5 h-5 text-white" />
-                    </div>
-                    <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                      Точные расчеты
-                    </p>
-                  </motion.div>
-
-                  <motion.div
-                    className={`p-4 ${isDark ? "glass" : "neu"} rounded-xl text-center cursor-pointer group`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-secondary flex items-center justify-center">
-                      <Calculator className="w-5 h-5 text-white" />
-                    </div>
-                    <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                      Быстрые результаты
-                    </p>
-                  </motion.div>
-                </motion.div>
-
-                {/* Additional Info */}
-                <motion.div
-                  variants={itemVariants}
-                  className={`p-4 ${isDark ? "glass" : "neu-inset"} rounded-xl`}
-                >
-                  <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
-                    <motion.div
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    >
-                      <Sparkles className="w-4 h-4 text-primary" />
-                    </motion.div>
-                    <span>Современный интерфейс с Glassmorphism</span>
-                  </div>
-                </motion.div>
-              </CardContent>
             </Card>
           </motion.div>
         </motion.div>
+      </div>
+
+      {/* Moved CardContent outside */}
+      <div className="relative z-10 px-6 pb-6 max-w-md mx-auto">
+        <CardContent className="p-0">
+          <motion.div variants={itemVariants}>
+            <Button
+              onClick={() => navigate("/calculator")}
+              className="w-full h-14 text-lg font-semibold bg-gradient-primary hover:bg-gradient-secondary border-0 shadow-lg transition-all duration-200 group"
+              size="lg"
+            >
+              <Package className="w-5 h-5 mr-3 group-hover:rotate-6 transition-transform duration-200" />
+              Калькулятор Wildberries
+              <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-0.5 transition-transform duration-200" />
+            </Button>
+          </motion.div>
+
+          {/* Feature Cards - simplified hover effects */}
+          <motion.div
+            className="grid grid-cols-2 gap-4 mt-6"
+            variants={itemVariants}
+          >
+            <motion.div
+              className={`p-4 ${isDark ? "glass" : "neu"} rounded-xl text-center cursor-pointer group`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-accent flex items-center justify-center">
+                <TrendingUp className="w-5 h-5 text-white" />
+              </div>
+              <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                Точные расчеты
+              </p>
+            </motion.div>
+
+            <motion.div
+              className={`p-4 ${isDark ? "glass" : "neu"} rounded-xl text-center cursor-pointer group`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-secondary flex items-center justify-center">
+                <Calculator className="w-5 h-5 text-white" />
+              </div>
+              <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                Быстрые результаты
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* Additional Info */}
+          <motion.div
+            variants={itemVariants}
+            className={`p-4 ${isDark ? "glass" : "neu-inset"} rounded-xl mt-6`}
+          >
+            <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+              </motion.div>
+              <span>Современный интерфейс с Glassmorphism</span>
+            </div>
+          </motion.div>
+        </CardContent>
       </div>
     </div>
   );
