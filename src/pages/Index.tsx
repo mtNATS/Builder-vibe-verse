@@ -161,7 +161,7 @@ const Index = () => {
                     backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
                   }}
                 >
-                  {/* Pixel-Perfect Logo */}
+                  {/* Final Clean Logo */}
                   <svg
                     width="50"
                     height="50"
@@ -178,7 +178,7 @@ const Index = () => {
                       strokeWidth="3"
                     />
 
-                    {/* Vertical stem of 't' */}
+                    {/* Vertical stem */}
                     <rect
                       x="30"
                       y="18"
@@ -188,58 +188,45 @@ const Index = () => {
                       fill="white"
                     />
 
-                    {/* Flowing banner/ribbon - top curve */}
+                    {/* Flowing horizontal banner */}
                     <path
                       d="M24 32
                          C 23 30 24 28 26 28
-                         L 84 30
-                         C 87 30.5 88 32 87 35
-                         C 86 38 83 40 80 40.5
-                         C 76 41 71 40 66 38.5
-                         C 60 37 54 35 48 33.5
-                         C 42 32 36 31 30 30.5
-                         C 27 30 25 30.5 24 32 Z"
+                         L 84 32
+                         C 86 33 86 35 84 36
+                         C 82 37 78 37 74 36
+                         L 62 34
+                         C 54 32 46 31 38 30
+                         L 30 29
+                         C 27 29 25 30 24 32 Z"
                       fill="white"
                     />
 
-                    {/* Banner bottom curve */}
+                    {/* Banner shadow/depth */}
                     <path
-                      d="M24 38
-                         C 23.5 40 24.5 42 27 42
-                         L 84 40
-                         C 87 39.5 88 37 87 34
-                         C 86 31 83 29 80 29.5
-                         C 76 30 71 31 66 32.5
-                         C 60 34 54 36 48 37.5
-                         C 42 39 36 40 30 40.5
-                         C 27 41 25 39.5 24 38 Z"
-                      fill="white"
-                    />
-
-                    {/* Banner shadow for depth */}
-                    <path
-                      d="M30 35
+                      d="M30 34
                          L 75 36
-                         C 78 36 79 37 78 38
-                         C 77 39 75 39 72 38.5
-                         C 65 37.5 58 36.5 51 35.5
-                         C 44 34.5 37 34.5 30 35 Z"
+                         C 77 36.5 77 37.5 75 38
+                         C 73 38.5 69 38 65 37
+                         L 55 35
+                         C 47 34 39 33.5 31 33.5
+                         C 30 33.5 30 34 30 34 Z"
                       fill="white"
-                      opacity="0.6"
+                      opacity="0.7"
                     />
 
-                    {/* Bottom horizontal base */}
+                    {/* Bottom base */}
                     <rect
                       x="30"
                       y="70"
-                      width="42"
+                      width="40"
                       height="8"
                       rx="4"
                       fill="white"
                     />
 
                     {/* Rounded end */}
-                    <circle cx="72" cy="74" r="4" fill="white" />
+                    <circle cx="70" cy="74" r="4" fill="white" />
                   </svg>
                 </motion.div>
 
