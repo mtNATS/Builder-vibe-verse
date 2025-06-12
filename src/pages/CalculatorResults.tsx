@@ -197,7 +197,7 @@ const CalculatorResults = () => {
       </motion.div>
 
       {/* Main Content - Unified layout */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
+      <div className="relative z-10 min-h-screen flex flex-col justify-start pt-8 p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
           variants={containerVariants}
@@ -374,7 +374,7 @@ const CalculatorResults = () => {
                     <div className="flex justify-between items-center">
                       <div>
                         <h4 className="text-lg font-bold text-foreground">
-                          Общие ��атраты
+                          Общие затраты
                         </h4>
                         <p className="text-sm text-muted-foreground">
                           Логистика + комиссии
