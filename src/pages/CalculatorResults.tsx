@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
+  ArrowRight,
   Star,
   TrendingUp,
   TrendingDown,
@@ -38,7 +39,7 @@ const CalculatorResults = () => {
       supplierCommissionPercent: 15.5,
     },
     productInfo: {
-      title: "Протеиновые батончики без сахара Layers Ассорти, 4ш�� х 60г",
+      title: "Протеиновые батончики без сахара Layers Ассорти, 4шт х 60г",
       price: 435,
       rating: 4.8,
       reviewCount: 5247,
