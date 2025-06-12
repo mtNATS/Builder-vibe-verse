@@ -28,12 +28,70 @@ export interface CommissionCosts {
 export interface CalculationResults {
   logistics: LogisticsCosts;
   commissions: CommissionCosts;
-  productInfo: {
-    title: string;
-    price: number;
-    rating?: number;
-    reviewCount?: number;
+  productInfo: ProductInfo;
+}
+
+export interface ProductInfo {
+  title: string;
+  price: number;
+  rating?: number;
+  reviewCount?: number;
+  articleId?: string;
+  category?: string;
+  brand?: string;
+  description?: string;
+  images?: string[];
+  seller?: SellerInfo;
+  specifications?: Record<string, string>;
+  availability?: {
+    inStock: boolean;
+    remainingCount?: number;
+    warehouses?: string[];
   };
+}
+
+export interface SellerInfo {
+  id: string;
+  name: string;
+  type: "individual" | "company";
+  rating: number;
+  reviewCount: number;
+  registrationDate: string;
+  totalProducts: number;
+  verificationStatus: "verified" | "unverified";
+  location: {
+    country: string;
+    city: string;
+    region?: string;
+  };
+  contactInfo?: {
+    phone?: string;
+    email?: string;
+    website?: string;
+  };
+  businessInfo?: {
+    inn?: string;
+    ogrn?: string;
+    legalAddress?: string;
+  };
+}
+
+export interface CalculationHistory {
+  id: string;
+  date: string;
+  productInfo: ProductInfo;
+  formData: CalculatorFormData;
+  results: CalculationResults;
+  notes?: string;
+}
+
+export interface FeedbackForm {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  type: "bug" | "feature" | "question" | "complaint" | "other";
+  priority: "low" | "medium" | "high";
 }
 
 export interface MarketplaceOption {
