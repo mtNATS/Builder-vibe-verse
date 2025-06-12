@@ -22,7 +22,31 @@ import { CalculationResults } from "@/types/calculator";
 const CalculatorResults = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { results } = location.state as { results: CalculationResults };
+
+  // Fallback data in case location.state is undefined
+  const defaultResults: CalculationResults = {
+    logistics: {
+      deliveryCost: 47.5,
+      storageCost: 0.0,
+      returnCost: 137.5,
+      totalExpenses: 185.0,
+    },
+    commissions: {
+      marketplaceCommission: 67.42,
+      marketplaceCommissionPercent: 15.5,
+      supplierCommission: 67.42,
+      supplierCommissionPercent: 15.5,
+    },
+    productInfo: {
+      title: "Протеиновые батончики без сахара Layers Ассорти, 4шт х 60г",
+      price: 435,
+      rating: 4.8,
+      reviewCount: 5247,
+    },
+  };
+
+  // Safely extract results with fallback
+  const results = location.state?.results || defaultResults;
 
   const goBack = () => {
     navigate("/calculator/form");
