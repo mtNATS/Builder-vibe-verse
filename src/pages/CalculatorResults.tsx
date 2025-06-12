@@ -271,62 +271,12 @@ const CalculatorResults = () => {
                   className="grid grid-cols-2 gap-3"
                 >
                   <Button
-                    onClick={() => navigate("/calculator/form")}
-                    className={`h-10 text-sm font-medium border-0 ${isDark ? "glass text-primary hover:bg-white/10" : "neu-button bg-gradient-primary text-white"}`}
-                  >
-                    <Package className="w-4 h-4 mr-2" />
-                    Новый расчёт
-                  </Button>
-                  <Button
                     variant="outline"
                     className={`h-10 text-sm ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
                   >
                     <Info className="w-4 h-4 mr-2" />
                     Подробности
                   </Button>
-                </motion.div>
-
-                {/* Summary Card */}
-                <motion.div
-                  variants={itemVariants}
-                  className={`p-4 ${isDark ? "glass-intense" : "neu-inset"} rounded-xl relative overflow-hidden`}
-                >
-                  <div className="text-center">
-                    <div className="flex items-center justify-center gap-2 mb-3">
-                      <Target className="w-5 h-5 text-primary" />
-                      <h3 className="text-foreground text-lg font-bold">
-                        Общие затраты
-                      </h3>
-                    </div>
-                    <div className="text-3xl font-bold text-red-500 mb-4">
-                      {formatCurrency(totalCosts)}
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div
-                        className={`p-3 ${isDark ? "glass" : "neu"} rounded-lg`}
-                      >
-                        <div className="text-muted-foreground mb-1">
-                          Логистика
-                        </div>
-                        <div className="text-green-500 font-bold">
-                          {formatCurrency(results.logistics.totalExpenses)}
-                        </div>
-                      </div>
-                      <div
-                        className={`p-3 ${isDark ? "glass" : "neu"} rounded-lg`}
-                      >
-                        <div className="text-muted-foreground mb-1">
-                          Комиссии
-                        </div>
-                        <div className="text-purple-500 font-bold">
-                          {formatCurrency(
-                            results.commissions.marketplaceCommission +
-                              results.commissions.supplierCommission,
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </motion.div>
 
                 {/* Detailed Breakdown */}
@@ -425,49 +375,6 @@ const CalculatorResults = () => {
                         </span>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-
-                {/* Main Action Button */}
-                <motion.div variants={itemVariants}>
-                  <Button
-                    onClick={() => navigate("/calculator/form")}
-                    className={`w-full h-12 text-base font-semibold border-0 shadow-lg transition-all duration-200 group ${
-                      isDark
-                        ? "glass text-white hover:bg-white/10"
-                        : "neu-button bg-gradient-primary text-white hover:shadow-xl"
-                    }`}
-                    size="lg"
-                  >
-                    <div className="flex items-center justify-center relative z-10">
-                      <Zap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-                      Новый расчёт
-                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform duration-200" />
-                    </div>
-                    {/* Gradient overlay for light theme */}
-                    {!isDark && (
-                      <div className="absolute inset-0 bg-gradient-primary opacity-90 rounded-lg" />
-                    )}
-                  </Button>
-                </motion.div>
-
-                {/* Additional Info */}
-                <motion.div
-                  variants={itemVariants}
-                  className={`p-3 ${isDark ? "glass" : "neu-inset"} rounded-lg`}
-                >
-                  <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
-                    <motion.div
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    >
-                      <Sparkles className="w-3 h-3 text-primary" />
-                    </motion.div>
-                    <span>
-                      {hasValidData
-                        ? "Расчет выполнен успешно"
-                        : "Демонстрационные данные"}
-                    </span>
                   </div>
                 </motion.div>
               </CardContent>
