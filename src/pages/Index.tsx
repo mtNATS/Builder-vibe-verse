@@ -161,51 +161,74 @@ const Index = () => {
                     backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
                   }}
                 >
-                  {/* Exact Logo SVG */}
+                  {/* Exact Logo SVG - Stylized 't' with flowing ribbon */}
                   <svg
                     width="50"
                     height="50"
                     viewBox="0 0 100 100"
                     className="relative z-10"
                   >
-                    {/* Outer circle with organic shape */}
-                    <path
-                      d="M50 5 C75 5 95 25 95 50 C95 65 88 78 77 87 C70 92 62 95 50 95 C25 95 5 75 5 50 C5 35 12 22 23 13 C30 8 38 5 50 5 Z"
+                    {/* Perfect circle outline */}
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="45"
                       fill="none"
                       stroke="white"
-                      strokeWidth="3"
+                      strokeWidth="4"
                     />
 
-                    {/* Main vertical stem of the 't' */}
-                    <path
-                      d="M35 20 L35 75 C35 78 37 80 40 80 L45 80 C48 80 50 78 50 75 L50 45"
+                    {/* Main vertical stem of the 't' - left side */}
+                    <rect
+                      x="30"
+                      y="20"
+                      width="12"
+                      height="55"
+                      rx="6"
                       fill="white"
                     />
 
-                    {/* Horizontal top of the 't' */}
+                    {/* Flowing horizontal ribbon/banner */}
                     <path
-                      d="M25 30 L55 30 C58 30 60 28 60 25 C60 22 58 20 55 20 L30 20 C27 20 25 22 25 25 C25 27 25 28.5 25 30 Z"
+                      d="M25 35
+                         C25 32 27 30 30 30
+                         L70 30
+                         C85 30 90 35 88 42
+                         C86 48 80 52 72 50
+                         L65 48
+                         C60 46 55 44 50 42
+                         L45 40
+                         C40 38 35 36 30 35
+                         C27 34 25 34 25 35 Z"
                       fill="white"
                     />
 
-                    {/* Flowing ribbon/banner element */}
+                    {/* Subtle shadow/depth on the ribbon */}
                     <path
-                      d="M45 35 C50 32 58 33 65 36 C70 38 75 42 75 48 C75 52 72 55 68 56 C63 57 57 55 52 52 C48 49 45 45 42 41 C40 38 40 36 42 35 C43 34.5 44 34.5 45 35 Z"
-                      fill="white"
-                    />
-
-                    {/* Inner shadow/depth for the ribbon */}
-                    <path
-                      d="M48 38 C52 37 58 38 63 40 C67 42 70 45 70 48 C70 50 68 51 65 51 C61 51 56 49 52 47 C49 45 47 42 47 40 C47 39 47.5 38.5 48 38 Z"
+                      d="M30 35
+                         L65 35
+                         C75 35 80 38 78 42
+                         C76 45 70 47 62 45
+                         L55 43
+                         C50 41 45 39 40 37
+                         L35 36
+                         C32 35 30 35 30 35 Z"
                       fill="rgb(156, 163, 175)"
-                      opacity="0.4"
+                      opacity="0.3"
                     />
 
-                    {/* Bottom part of 't' with rounded end */}
-                    <path
-                      d="M35 65 L35 75 C35 78 37 80 40 80 L45 80 C48 80 50 78 50 75 L50 70"
+                    {/* Bottom horizontal base */}
+                    <rect
+                      x="30"
+                      y="65"
+                      width="35"
+                      height="12"
+                      rx="6"
                       fill="white"
                     />
+
+                    {/* Rounded end cap for the bottom */}
+                    <circle cx="65" cy="71" r="6" fill="white" />
                   </svg>
                 </motion.div>
 
