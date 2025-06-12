@@ -39,6 +39,10 @@ const Index = () => {
     document.documentElement.classList.toggle("dark");
   };
 
+  const handleStartCalculation = () => {
+    navigate("/calculator/form");
+  };
+
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -119,25 +123,19 @@ const Index = () => {
         {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
       </motion.button>
 
-      {/* Main Content */}
-      <div
-        className="relative z-10 min-h-screen flex items-center justify-center p-6"
-        style={{
-          "@media (max-width: 640px)": {
-            minHeight: "102px",
-          },
-        }}
-      >
+      {/* Main Content - More compact layout */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
         <motion.div
-          className="w-full max-w-md"
+          className="w-full"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={itemVariants}>
+          {/* Compact Header Section */}
+          <motion.div variants={itemVariants} className="text-center mb-6">
             <Card className="glass-card border-0 shadow-xl">
-              <CardHeader className="text-center relative">
-                {/* Simplified sparkle */}
+              <CardHeader className="pb-4 pt-6">
+                {/* Sparkle */}
                 <motion.div
                   className="absolute -top-2 -right-2"
                   animate={{
@@ -152,23 +150,21 @@ const Index = () => {
                   <Sparkles className="w-4 h-4 text-primary opacity-60" />
                 </motion.div>
 
-                {/* Custom Logo */}
+                {/* Logo */}
                 <motion.div
-                  className={`w-20 h-20 mx-auto mb-6 rounded-full ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
+                  className={`w-16 h-16 mx-auto mb-4 rounded-full ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   style={{
-                    backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
+                    backgroundColor: "rgb(156, 163, 175)",
                   }}
                 >
-                  {/* Accurate Logo Replica */}
                   <svg
-                    width="50"
-                    height="50"
+                    width="40"
+                    height="40"
                     viewBox="0 0 100 100"
                     className="relative z-10"
                   >
-                    {/* Circle outline */}
                     <circle
                       cx="50"
                       cy="50"
@@ -177,8 +173,6 @@ const Index = () => {
                       stroke="white"
                       strokeWidth="3"
                     />
-
-                    {/* Vertical stem of 't' */}
                     <rect
                       x="30"
                       y="20"
@@ -187,22 +181,18 @@ const Index = () => {
                       rx="4"
                       fill="white"
                     />
-
-                    {/* Flowing banner/ribbon */}
                     <path
-                      d="M22 32
-                         C 21 30 22 28 24 28
-                         L 82 30
-                         C 85 30.5 86 32.5 85 35
-                         C 84 37.5 81 39 78 39
-                         C 74 39 69 38 64 36.5
-                         C 58 35 52 33.5 46 32
-                         C 40 30.5 34 29.5 28 29
+                      d="M22 32 
+                         C 21 30 22 28 24 28 
+                         L 82 30 
+                         C 85 30.5 86 32.5 85 35 
+                         C 84 37.5 81 39 78 39 
+                         C 74 39 69 38 64 36.5 
+                         C 58 35 52 33.5 46 32 
+                         C 40 30.5 34 29.5 28 29 
                          C 25 28.5 23 29.5 22 32 Z"
                       fill="white"
                     />
-
-                    {/* Bottom horizontal base */}
                     <rect
                       x="30"
                       y="70"
@@ -211,95 +201,98 @@ const Index = () => {
                       rx="4"
                       fill="white"
                     />
-
-                    {/* Rounded end cap */}
                     <circle cx="68" cy="74" r="4" fill="white" />
                   </svg>
                 </motion.div>
 
-                {/* Title */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <CardTitle className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
-                    Fusion Starter
-                  </CardTitle>
-                  <CardDescription className="text-lg text-muted-foreground">
-                    Добро пожаловать в приложение для расчета логистических
-                    затрат
-                  </CardDescription>
-                </motion.div>
+                {/* Compact Title */}
+                <CardTitle className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
+                  Fusion Starter
+                </CardTitle>
+                <CardDescription className="text-sm text-muted-foreground">
+                  Калькулятор логистических затрат
+                </CardDescription>
               </CardHeader>
+
+              <CardContent className="pt-0 pb-6">
+                {/* Enhanced Main CTA Button with Neumorphism */}
+                <motion.div variants={itemVariants} className="mb-4">
+                  <Button
+                    onClick={handleStartCalculation}
+                    className={`w-full h-12 text-base font-semibold border-0 shadow-lg transition-all duration-200 group relative overflow-hidden ${
+                      isDark
+                        ? "glass text-white hover:bg-white/10"
+                        : "neu-button bg-gradient-primary text-white hover:shadow-xl"
+                    }`}
+                    size="lg"
+                  >
+                    <div className="flex items-center justify-center relative z-10">
+                      <Package className="w-5 h-5 mr-2 group-hover:rotate-6 transition-transform duration-200" />
+                      Калькулятор Wildberries
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform duration-200" />
+                    </div>
+                    {/* Gradient overlay */}
+                    {!isDark && (
+                      <div className="absolute inset-0 bg-gradient-primary opacity-90 rounded-lg" />
+                    )}
+                  </Button>
+                </motion.div>
+
+                {/* Compact Feature Cards with outlined icons */}
+                <motion.div
+                  className="grid grid-cols-2 gap-3"
+                  variants={itemVariants}
+                >
+                  <motion.div
+                    className={`p-3 ${isDark ? "glass" : "neu"} rounded-lg text-center cursor-pointer group`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gradient-accent flex items-center justify-center relative">
+                      {/* Icon outline */}
+                      <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
+                      <TrendingUp className="w-4 h-4 text-white relative z-10" />
+                    </div>
+                    <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors">
+                      Точные расчеты
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    className={`p-3 ${isDark ? "glass" : "neu"} rounded-lg text-center cursor-pointer group`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gradient-secondary flex items-center justify-center relative">
+                      {/* Icon outline */}
+                      <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
+                      <Calculator className="w-4 h-4 text-white relative z-10" />
+                    </div>
+                    <p className="text-xs font-medium text-foreground group-hover:text-primary transition-colors">
+                      Быстрые результаты
+                    </p>
+                  </motion.div>
+                </motion.div>
+
+                {/* Compact Additional Info */}
+                <motion.div
+                  variants={itemVariants}
+                  className={`p-3 ${isDark ? "glass" : "neu-inset"} rounded-lg mt-4`}
+                >
+                  <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
+                      <Sparkles className="w-3 h-3 text-primary" />
+                    </motion.div>
+                    <span>Современный ин��ерфейс с Glassmorphism</span>
+                  </div>
+                </motion.div>
+              </CardContent>
             </Card>
           </motion.div>
         </motion.div>
-      </div>
-
-      {/* Moved CardContent outside */}
-      <div className="relative z-10 px-6 pb-6 max-w-md mx-auto">
-        <CardContent className="p-0">
-          <motion.div variants={itemVariants}>
-            <Button
-              onClick={() => navigate("/calculator")}
-              className="w-full h-14 text-lg font-semibold bg-gradient-primary hover:bg-gradient-secondary border-0 shadow-lg transition-all duration-200 group"
-              size="lg"
-            >
-              <Package className="w-5 h-5 mr-3 group-hover:rotate-6 transition-transform duration-200" />
-              Калькулятор Wildberries
-              <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-0.5 transition-transform duration-200" />
-            </Button>
-          </motion.div>
-
-          {/* Feature Cards - simplified hover effects */}
-          <motion.div
-            className="grid grid-cols-2 gap-4 mt-6"
-            variants={itemVariants}
-          >
-            <motion.div
-              className={`p-4 ${isDark ? "glass" : "neu"} rounded-xl text-center cursor-pointer group`}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-accent flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-white" />
-              </div>
-              <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                Точные расчеты
-              </p>
-            </motion.div>
-
-            <motion.div
-              className={`p-4 ${isDark ? "glass" : "neu"} rounded-xl text-center cursor-pointer group`}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-gradient-secondary flex items-center justify-center">
-                <Calculator className="w-5 h-5 text-white" />
-              </div>
-              <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                Быстрые результаты
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* Additional Info */}
-          <motion.div
-            variants={itemVariants}
-            className={`p-4 ${isDark ? "glass" : "neu-inset"} rounded-xl mt-6`}
-          >
-            <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <Sparkles className="w-4 h-4 text-primary" />
-              </motion.div>
-              <span>Современный интерфейс с Glassmorphism</span>
-            </div>
-          </motion.div>
-        </CardContent>
       </div>
     </div>
   );
