@@ -7,6 +7,9 @@ import {
   Package,
   Moon,
   Sun,
+  Sparkles,
+  Zap,
+  Target,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,166 +36,295 @@ const Calculator = () => {
   };
 
   const statsData = [
-    { value: "247", label: "Клиентов", color: "text-blue-400" },
-    { value: "1286", label: "Товаров", color: "text-green-400" },
-    { value: "1.2M", label: "На сумму", color: "text-orange-400" },
+    { value: "247", label: "Клиентов", color: "text-blue-400", icon: Target },
+    { value: "1286", label: "Товаров", color: "text-green-400", icon: Package },
+    {
+      value: "1.2M",
+      label: "На сумму",
+      color: "text-orange-400",
+      icon: TrendingUp,
+    },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
-    <div
-      className={`min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 ${isDark ? "dark" : ""}`}
-    >
+    <div className="min-h-screen morph-bg relative overflow-hidden">
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Animated gradient orbs */}
+        <motion.div
+          className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-primary opacity-30 blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-accent opacity-25 blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -40, 0],
+            y: [0, 40, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 5,
+          }}
+        />
+
+        {/* Floating particles */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white/20 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -100, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Theme Toggle */}
       <motion.button
         onClick={toggleTheme}
-        className="absolute top-6 right-6 z-50 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+        className="absolute top-6 right-6 z-50 p-3 glass-button text-white hover-lift pulse-glow"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        initial={{ opacity: 0, rotate: -180 }}
+        animate={{ opacity: 1, rotate: 0 }}
+        transition={{ delay: 0.5, type: "spring" }}
       >
         {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
       </motion.button>
 
       <div className="relative min-h-screen flex flex-col items-center justify-center p-6 max-w-md mx-auto">
-        {/* Background Effects */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-500/20 blur-3xl"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-purple-500/20 blur-3xl"></div>
-        </div>
-
-        {/* Main Content */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
           className="relative z-10 w-full"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          {/* App Icon */}
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{
-              delay: 0.3,
-              duration: 0.8,
-              type: "spring",
-              bounce: 0.4,
-            }}
-            className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl shadow-blue-500/25"
-          >
-            <ArrowRight className="w-10 h-10 text-white" />
+          {/* App Icon with enhanced effects */}
+          <motion.div variants={itemVariants} className="text-center mb-8">
+            <motion.div
+              className="w-24 h-24 glass-intense rounded-3xl flex items-center justify-center mx-auto mb-6 relative overflow-hidden hover-lift"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              animate={{
+                boxShadow: [
+                  "0 20px 40px -15px rgba(102, 126, 234, 0.4)",
+                  "0 25px 50px -15px rgba(102, 126, 234, 0.6)",
+                  "0 20px 40px -15px rgba(102, 126, 234, 0.4)",
+                ],
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <div className="absolute inset-0 bg-gradient-primary opacity-90 rounded-3xl" />
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                className="relative z-10"
+              >
+                <ArrowRight className="w-12 h-12 text-white" />
+              </motion.div>
+
+              {/* Sparkle effects */}
+              <motion.div
+                className="absolute top-2 right-2"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  rotate: [0, 180, 360],
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Sparkles className="w-3 h-3 text-white/60" />
+              </motion.div>
+            </motion.div>
+
+            {/* App Title with enhanced styling */}
+            <motion.div variants={itemVariants}>
+              <h1 className="text-4xl font-bold text-white mb-2 text-glow-soft">
+                Wildberries
+              </h1>
+              <h2 className="text-3xl font-semibold bg-gradient-accent bg-clip-text text-transparent mb-4">
+                Калькулятор
+              </h2>
+              <p className="text-white/80 text-lg leading-relaxed max-w-sm mx-auto">
+                Рассчитайте логистич��ские затраты и комиссии для ваших товаров
+                на маркетплейсах
+              </p>
+            </motion.div>
           </motion.div>
 
-          {/* App Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="text-center mb-8"
-          >
-            <h1 className="text-3xl font-bold text-white mb-2">Wildberries</h1>
-            <h2 className="text-2xl font-semibold text-white/90 mb-4">
-              Калькулятор
-            </h2>
-            <p className="text-white/70 text-lg leading-relaxed max-w-sm mx-auto">
-              Рассчитайте логистические затраты и комиссии для ваших товаров на
-              маркетплейсах
-            </p>
-          </motion.div>
-
-          {/* Start Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            className="mb-8"
-          >
+          {/* Start Button with enhanced effects */}
+          <motion.div variants={itemVariants} className="mb-8">
             <Button
               onClick={handleStartCalculation}
-              className="w-full h-14 bg-white text-slate-900 hover:bg-white/90 font-semibold text-lg rounded-2xl shadow-xl shadow-white/10 transition-all duration-300 hover:shadow-white/20"
+              className="w-full h-16 glass-intense text-slate-900 font-bold text-xl rounded-2xl relative overflow-hidden group bg-white/90 hover:bg-white border-0"
               size="lg"
             >
-              <ArrowRight className="w-5 h-5 mr-2" />
-              Начать работу
+              <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+              <motion.div
+                className="flex items-center justify-center relative z-10"
+                whileHover={{ scale: 1.05 }}
+              >
+                <Zap className="w-6 h-6 mr-3 group-hover:text-primary transition-colors" />
+                Начать работу
+                <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
+              </motion.div>
             </Button>
           </motion.div>
 
-          {/* Additional Features */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-            className="space-y-4"
-          >
+          {/* Feature Cards */}
+          <motion.div variants={itemVariants} className="space-y-4">
             {/* Search Section */}
-            <Card className="bg-white/5 backdrop-blur-sm border-white/10 text-white">
+            <Card className="glass-card border-0 text-white hover-lift">
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-500/20 rounded-lg">
-                    <Package className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <CardTitle className="text-lg">Поиск товара</CardTitle>
+                  <motion.div
+                    className="p-3 bg-gradient-primary rounded-xl"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <Package className="w-6 h-6 text-white" />
+                  </motion.div>
+                  <CardTitle className="text-xl">Поиск товара</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  <div className="h-10 bg-white/10 rounded-lg border border-white/20"></div>
-                  <div className="h-10 bg-white/5 rounded-lg border border-white/10"></div>
+                  <div className="h-12 glass rounded-xl border border-white/20 relative overflow-hidden">
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                      animate={{ x: [-100, 300] }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  </div>
+                  <div className="h-12 glass rounded-xl border border-white/10 opacity-60" />
                 </div>
               </CardContent>
             </Card>
 
             {/* Recent Calculations */}
-            <Card className="bg-white/5 backdrop-blur-sm border-white/10 text-white">
+            <Card className="glass-card border-0 text-white hover-lift">
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-green-500/20 rounded-lg">
-                      <Calculator className="w-5 h-5 text-green-400" />
-                    </div>
-                    <CardTitle className="text-lg">Последние расчеты</CardTitle>
+                    <motion.div
+                      className="p-3 bg-gradient-accent rounded-xl"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Calculator className="w-6 h-6 text-white" />
+                    </motion.div>
+                    <CardTitle className="text-xl">Последние расчеты</CardTitle>
                   </div>
                   <Badge
                     variant="secondary"
-                    className="bg-white/10 text-white/80 border-white/20"
+                    className="glass border-white/20 text-white/90 hover-lift cursor-pointer"
                   >
                     Все →
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-white/60 text-center py-4">
+                <p className="text-white/60 text-center py-6">
                   Пока нет расчетов
                 </p>
               </CardContent>
             </Card>
 
             {/* Statistics */}
-            <Card className="bg-white/5 backdrop-blur-sm border-white/10 text-white">
+            <Card className="glass-card border-0 text-white hover-lift">
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-purple-500/20 rounded-lg">
-                    <TrendingUp className="w-5 h-5 text-purple-400" />
-                  </div>
-                  <CardTitle className="text-lg">
+                  <motion.div
+                    className="p-3 bg-gradient-secondary rounded-xl"
+                    whileHover={{ rotate: -360 }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </motion.div>
+                  <CardTitle className="text-xl">
                     Статистика приложения
                   </CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-3 gap-4">
-                  {statsData.map((stat, index) => (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.1 + index * 0.1, duration: 0.6 }}
-                      className="text-center"
-                    >
-                      <div className={`text-2xl font-bold ${stat.color} mb-1`}>
-                        {stat.value}
-                      </div>
-                      <div className="text-white/60 text-sm">{stat.label}</div>
-                    </motion.div>
-                  ))}
+                  {statsData.map((stat, index) => {
+                    const IconComponent = stat.icon;
+                    return (
+                      <motion.div
+                        key={stat.label}
+                        className="text-center glass rounded-xl p-4 hover-lift cursor-pointer"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.2 + index * 0.2, duration: 0.6 }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <motion.div
+                          className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center"
+                          animate={{ rotate: [0, 360] }}
+                          transition={{
+                            duration: 10,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
+                        >
+                          <IconComponent className="w-4 h-4 text-white" />
+                        </motion.div>
+                        <div
+                          className={`text-2xl font-bold ${stat.color} mb-1 text-glow`}
+                        >
+                          {stat.value}
+                        </div>
+                        <div className="text-white/70 text-sm">
+                          {stat.label}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
