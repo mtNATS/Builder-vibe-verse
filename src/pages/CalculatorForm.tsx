@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  ArrowLeft,
-  Calculator,
-  Search,
-  Sparkles,
-  Moon,
-  Sun,
-} from "lucide-react";
+import { ArrowLeft, Search, Sparkles, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
@@ -147,85 +140,63 @@ const CalculatorForm = () => {
       {/* Main Content - Unified layout */}
       <div className="relative z-10 min-h-screen flex flex-col justify-start pt-8 p-4 max-w-md mx-auto">
         <motion.div
-          className="w-full"
+          className="w-full space-y-6"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0 shadow-xl">
-              <CardHeader className="text-center relative p-6">
-                {/* Product Icon - Unified size */}
-                <motion.div
-                  className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-primary opacity-90 rounded-2xl" />
-                  <Calculator className="w-8 h-8 text-white relative z-10" />
-                </motion.div>
-
-                {/* Title - Unified typography */}
-                <CardTitle className="text-xl font-bold text-foreground mb-3">
-                  Калькулятор WB
-                </CardTitle>
-
-                <div className="text-sm text-muted-foreground mb-6">
-                  Расчет логистики и комиссий
+            {/* Search Section - Simplified */}
+            <div
+              className={`p-6 ${isDark ? "glass-card" : "neu"} rounded-lg border-0 shadow-xl mb-6`}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center relative">
+                  <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
+                  <Search className="w-5 h-5 text-white relative z-10" />
                 </div>
-              </CardHeader>
+                <h4 className="text-lg font-semibold text-foreground">
+                  Поиск товара
+                </h4>
+              </div>
+              <div className="space-y-6">
+                <div>
+                  <Input
+                    placeholder="что ищем?"
+                    className={`h-12 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
+                  />
+                </div>
+                <Button className="w-full h-12 text-base font-semibold bg-gradient-primary text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
+                  <Search className="w-5 h-5 mr-2" />
+                  Найти товар
+                </Button>
+              </div>
+            </div>
 
-              <CardContent className="p-6 pt-0 space-y-8">
-                {/* Search Section - Unified spacing */}
-                <motion.div variants={itemVariants}>
-                  <div className={`p-6 ${isDark ? "glass" : "neu"} rounded-lg`}>
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center relative">
-                        <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                        <Search className="w-5 h-5 text-white relative z-10" />
-                      </div>
-                      <h4 className="text-lg font-semibold text-foreground">
-                        Поиск товара
-                      </h4>
-                    </div>
-                    <div className="space-y-6">
-                      <div>
-                        <Label className="text-muted-foreground text-sm mb-3 block font-medium">
-                          Арт��кул или ссылка
-                        </Label>
-                        <Input
-                          placeholder="Введите артикул товара или ссылку"
-                          className={`h-12 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
-                        />
-                      </div>
-                      <Button className="w-full h-12 text-base font-semibold bg-gradient-primary text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
-                        <Search className="w-5 h-5 mr-2" />
-                        Найти товар
-                      </Button>
-                    </div>
-                  </div>
+            {/* Info Section - Separated */}
+            <div
+              className={`p-6 ${isDark ? "glass-card" : "neu-inset"} rounded-lg border-0 shadow-xl`}
+            >
+              <Label className="text-muted-foreground text-sm mb-3 block font-medium">
+                Для поиска товара можно использовать:
+              </Label>
+              <div className="flex items-center text-sm text-muted-foreground">
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  <Sparkles className="w-4 h-4 text-primary mr-2" />
                 </motion.div>
-
-                {/* Info Section - Unified spacing */}
-                <motion.div variants={itemVariants}>
-                  <div
-                    className={`p-6 ${isDark ? "glass" : "neu-inset"} rounded-lg`}
-                  >
-                    <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
-                      <motion.div
-                        animate={{ scale: [1, 1.1, 1] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                      >
-                        <Sparkles className="w-4 h-4 text-primary" />
-                      </motion.div>
-                      <span>
-                        Введите артикул для автоматического заполнения
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              </CardContent>
-            </Card>
+                <span className="leading-relaxed">
+                  - ссылку на товар
+                  <br />
+                  - идентификатор товара
+                  <br />
+                  - поисковый запрос
+                  <br />
+                </span>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
