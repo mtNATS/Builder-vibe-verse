@@ -161,7 +161,7 @@ const Index = () => {
                     backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
                   }}
                 >
-                  {/* Perfect Logo Replica */}
+                  {/* Exact Logo Replica */}
                   <svg
                     width="50"
                     height="50"
@@ -172,79 +172,69 @@ const Index = () => {
                     <circle
                       cx="50"
                       cy="50"
-                      r="46"
+                      r="47"
                       fill="none"
                       stroke="white"
-                      strokeWidth="3.5"
+                      strokeWidth="3"
                     />
 
-                    {/* Vertical stem of 't' */}
+                    {/* Main vertical stem */}
                     <path
-                      d="M32 18
-                         L38 18
-                         C40 18 42 20 42 22
-                         L42 75
-                         C42 77 40 79 38 79
-                         L32 79
-                         C30 79 28 77 28 75
-                         L28 22
-                         C28 20 30 18 32 18 Z"
+                      d="M30 20
+                         C30 18 32 16 34 16
+                         L38 16
+                         C40 16 42 18 42 20
+                         L42 78
+                         C42 80 40 82 38 82
+                         L34 82
+                         C32 82 30 80 30 78
+                         L30 20 Z"
                       fill="white"
                     />
 
-                    {/* Top horizontal bar */}
+                    {/* Flowing horizontal ribbon/banner */}
                     <path
-                      d="M22 30
-                         L50 30
-                         C52 30 54 28 54 26
-                         C54 24 52 22 50 22
-                         L26 22
-                         C24 22 22 24 22 26
-                         C22 28 22 30 22 30 Z"
+                      d="M24 32
+                         C23 30 24 28 26 28
+                         L78 28
+                         C82 28 85 30 85 34
+                         C85 38 82 42 78 44
+                         C74 46 68 47 62 46
+                         L54 44
+                         C48 42 42 39 36 37
+                         L30 35
+                         C27 34 25 33 24 32 Z"
                       fill="white"
                     />
 
-                    {/* Flowing ribbon banner */}
+                    {/* Ribbon shadow for depth */}
                     <path
-                      d="M28 38
-                         C28 36 30 34 32 34
-                         L75 34
-                         C78 34 80 36 80 39
-                         C80 42 79 45 76 47
-                         C73 49 69 50 65 49
-                         L58 47
-                         C52 45 46 42 40 40
-                         L34 38
-                         C31 37 28 37 28 38 Z"
-                      fill="white"
-                    />
-
-                    {/* Ribbon shadow/depth */}
-                    <path
-                      d="M32 38
-                         L70 38
-                         C73 38 75 39 75 41
-                         C75 43 73 45 70 46
-                         L62 47
-                         C56 46 50 44 44 42
-                         L38 40
-                         C35 39 32 38 32 38 Z"
-                      fill="white"
-                      opacity="0.7"
+                      d="M30 35
+                         L70 32
+                         C75 32 78 34 78 37
+                         C78 40 75 42 70 43
+                         L60 44
+                         C54 44 48 42 42 40
+                         L36 38
+                         C33 37 30 36 30 35 Z"
+                      fill="rgb(200, 200, 200)"
+                      opacity="0.3"
                     />
 
                     {/* Bottom horizontal base */}
                     <path
-                      d="M28 65
-                         L68 65
-                         C72 65 75 68 75 72
-                         C75 76 72 79 68 79
-                         L32 79
-                         C30 79 28 77 28 75
-                         L28 69
-                         C28 67 28 65 28 65 Z"
+                      d="M30 70
+                         L70 70
+                         C74 70 78 72 78 76
+                         C78 80 74 82 70 82
+                         L34 82
+                         C32 82 30 80 30 78
+                         L30 70 Z"
                       fill="white"
                     />
+
+                    {/* Rounded end cap */}
+                    <ellipse cx="74" cy="76" rx="4" ry="6" fill="white" />
                   </svg>
                 </motion.div>
 
