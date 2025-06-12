@@ -161,7 +161,7 @@ const Index = () => {
                     backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
                   }}
                 >
-                  {/* Clean Logo Replica */}
+                  {/* Perfect Logo Replica */}
                   <svg
                     width="50"
                     height="50"
@@ -172,66 +172,60 @@ const Index = () => {
                     <circle
                       cx="50"
                       cy="50"
-                      r="46"
+                      r="46.5"
                       fill="none"
                       stroke="white"
                       strokeWidth="3"
                     />
 
-                    {/* Vertical stem */}
+                    {/* Main vertical stem */}
                     <rect
                       x="30"
-                      y="17"
-                      width="10"
-                      height="66"
-                      rx="5"
+                      y="18"
+                      width="9"
+                      height="64"
+                      rx="4.5"
                       fill="white"
                     />
 
-                    {/* Flowing horizontal ribbon */}
+                    {/* Flowing horizontal banner/ribbon */}
                     <path
-                      d="M25 32
-                         Q 25 30 27 30
-                         L 85 32
-                         Q 87 33 86 36
-                         Q 85 39 82 40
-                         Q 78 41 74 40
-                         L 65 38
-                         Q 55 36 45 34
-                         L 35 32
-                         Q 30 31 27 31
-                         Q 25 31 25 32 Z"
+                      d="M24 32
+                         C 23 30.5 24 29 26 29
+                         L 82 31
+                         C 85 31.5 86 34 85 37
+                         C 84 40 81 42 78 42.5
+                         C 74 43 69 42 64 40.5
+                         C 58 39 52 37 46 35.5
+                         C 40 34 34 33 28 32.5
+                         C 26 32 24 32 24 32 Z"
                       fill="white"
                     />
 
-                    {/* Ribbon shadow */}
+                    {/* Banner depth/shadow */}
                     <path
                       d="M30 34
-                         L 78 36
-                         Q 80 37 79 38
-                         Q 78 39 76 39
-                         L 65 38
-                         Q 55 37 45 35
-                         L 35 34
-                         Q 32 34 30 34 Z"
+                         C 45 35 60 36 75 38
+                         C 77 38.5 78 39 77 40
+                         C 76 41 74 41 72 40.5
+                         C 65 39 58 37.5 51 36
+                         C 44 34.5 37 34 30 34 Z"
                       fill="white"
-                      opacity="0.6"
+                      opacity="0.7"
                     />
 
-                    {/* Bottom base */}
-                    <path
-                      d="M30 70
-                         L 75 70
-                         Q 78 70 78 73
-                         Q 78 76 75 76
-                         L 35 76
-                         Q 30 76 30 73
-                         Q 30 70 30 70 Z"
+                    {/* Bottom horizontal base */}
+                    <rect
+                      x="30"
+                      y="69"
+                      width="44"
+                      height="9"
+                      rx="4.5"
                       fill="white"
                     />
 
-                    {/* Rounded end */}
-                    <circle cx="75" cy="73" r="3" fill="white" />
+                    {/* Rounded end cap */}
+                    <circle cx="74" cy="73.5" r="4.5" fill="white" />
                   </svg>
                 </motion.div>
 
