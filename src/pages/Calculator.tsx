@@ -71,7 +71,7 @@ const Calculator = () => {
   const boxTypes: BoxOption[] = [
     { value: "small", label: "Малая коробка (до 1 кг)" },
     { value: "medium", label: "Средняя коробка (до 5 кг)" },
-    { value: "large", label: "Большая коробка (��о 25 кг)" },
+    { value: "large", label: "Большая коробка (до 25 кг)" },
     { value: "envelope", label: "Конверт (до 500 г)" },
   ];
 
@@ -210,7 +210,7 @@ const Calculator = () => {
       </motion.button>
 
       {/* Main Content - Unified layout */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
+      <div className="relative z-10 min-h-screen flex flex-col justify-start pt-20 p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
           variants={containerVariants}
@@ -378,7 +378,7 @@ const Calculator = () => {
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <Label className="text-muted-foreground text-sm mb-3 block font-medium">
-                            Количество шт.
+                            Количество ��т.
                           </Label>
                           <Input
                             type="number"
@@ -510,7 +510,7 @@ const Calculator = () => {
                           1.2M
                         </div>
                         <div className="text-muted-foreground text-xs">
-                          На ��умму
+                          На сумму
                         </div>
                       </motion.div>
                     </div>
