@@ -252,34 +252,9 @@ const Calculator = () => {
               </CardHeader>
 
               <CardContent className="pt-0 space-y-6 sm:mb-5">
-                {/* Search Section */}
+                {/* Search Section Placeholder */}
                 <motion.div variants={itemVariants}>
-                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-gradient-primary rounded-lg relative">
-                        <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                        <Search className="w-4 h-4 text-white relative z-10" />
-                      </div>
-                      <h4 className="font-semibold text-foreground">
-                        Поиск товара
-                      </h4>
-                    </div>
-                    <div className="space-y-3">
-                      <div>
-                        <Label className="text-muted-foreground text-sm mb-2 block">
-                          Артикул или ссылка
-                        </Label>
-                        <Input
-                          placeholder="Введите артикул товара"
-                          className={`h-10 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
-                        />
-                      </div>
-                      <Button className="w-full h-10 text-sm font-medium bg-gradient-primary text-white border-0">
-                        <Search className="w-4 h-4 mr-2" />
-                        Найти товар
-                      </Button>
-                    </div>
-                  </div>
+                  <div />
                 </motion.div>
 
                 {/* Product Parameters Section */}
@@ -291,7 +266,7 @@ const Calculator = () => {
                         <Package className="w-4 h-4 text-white relative z-10" />
                       </div>
                       <h4 className="font-semibold text-foreground">
-                        Пара��етры товара
+                        Параметры товара
                       </h4>
                     </div>
                     <div className="space-y-4">
@@ -484,10 +459,7 @@ const Calculator = () => {
                         </>
                       )}
                     </div>
-                    {/* Gradient overlay for light theme */}
-                    {!isDark && (
-                      <div className="absolute inset-0 bg-gradient-primary opacity-90 rounded-lg" />
-                    )}
+                    <div className="flex flex-row" />
                   </Button>
                 </motion.div>
 
