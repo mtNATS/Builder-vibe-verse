@@ -85,19 +85,6 @@ const Index = () => {
           }}
         />
         <motion.div
-          className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-gradient-accent opacity-15 blur-3xl floating"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 5,
-          }}
-        />
-        <motion.div
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-secondary opacity-10 blur-3xl floating"
           animate={{
             scale: [1, 1.1, 1],
@@ -182,14 +169,14 @@ const Index = () => {
                       fill="white"
                     />
                     <path
-                      d="M22 32 
-                         C 21 30 22 28 24 28 
-                         L 82 30 
-                         C 85 30.5 86 32.5 85 35 
-                         C 84 37.5 81 39 78 39 
-                         C 74 39 69 38 64 36.5 
-                         C 58 35 52 33.5 46 32 
-                         C 40 30.5 34 29.5 28 29 
+                      d="M22 32
+                         C 21 30 22 28 24 28
+                         L 82 30
+                         C 85 30.5 86 32.5 85 35
+                         C 84 37.5 81 39 78 39
+                         C 74 39 69 38 64 36.5
+                         C 58 35 52 33.5 46 32
+                         C 40 30.5 34 29.5 28 29
                          C 25 28.5 23 29.5 22 32 Z"
                       fill="white"
                     />
@@ -286,13 +273,16 @@ const Index = () => {
                     >
                       <Sparkles className="w-3 h-3 text-primary" />
                     </motion.div>
-                    <span>Современный ин��ерфейс с Glassmorphism</span>
+                    <span>Современный интерфейс с Glassmorphism</span>
                   </div>
                 </motion.div>
               </CardContent>
             </Card>
           </motion.div>
         </motion.div>
+
+        {/* Additional styled element */}
+        <div className="glass rounded-lg p-4" />
       </div>
     </div>
   );
