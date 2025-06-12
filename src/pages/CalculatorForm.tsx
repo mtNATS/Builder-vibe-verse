@@ -68,35 +68,32 @@ const CalculatorForm = () => {
   const handleCalculate = async () => {
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      navigate("/calculator/results", {
-        state: {
-          formData,
-          results: {
-            logistics: {
-              deliveryCost: 47.5,
-              storageCost: 0.0,
-              returnCost: 137.5,
-              totalExpenses: 185.0,
-            },
-            commissions: {
-              marketplaceCommission: 67.42,
-              marketplaceCommissionPercent: 15.5,
-              supplierCommission: 67.42,
-              supplierCommissionPercent: 15.5,
-            },
-            productInfo: {
-              title:
-                "Протеиновые батончики без сахара Layers Ассорти, 4шт х 60г",
-              price: formData.price,
-              rating: 4.8,
-              reviewCount: 5247,
-            },
+    // Navigate to loading screen first
+    navigate("/calculator/loading", {
+      state: {
+        formData,
+        targetResults: {
+          logistics: {
+            deliveryCost: 47.5,
+            storageCost: 0.0,
+            returnCost: 137.5,
+            totalExpenses: 185.0,
+          },
+          commissions: {
+            marketplaceCommission: 67.42,
+            marketplaceCommissionPercent: 15.5,
+            supplierCommission: 67.42,
+            supplierCommissionPercent: 15.5,
+          },
+          productInfo: {
+            title: "Протеиновые батончики без сахара Layers Ассорти, 4шт х 60г",
+            price: formData.price,
+            rating: 4.8,
+            reviewCount: 5247,
           },
         },
-      });
-    }, 2000);
+      },
+    });
   };
 
   const goBack = () => {

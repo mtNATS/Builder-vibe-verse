@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Calculator from "./pages/Calculator";
 import CalculatorForm from "./pages/CalculatorForm";
+import CalculatorLoading from "./pages/CalculatorLoading";
 import CalculatorResults from "./pages/CalculatorResults";
 import NotFound from "./pages/NotFound";
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/calculator" element={<Calculator />} />
           <Route path="/calculator/form" element={<CalculatorForm />} />
+          <Route path="/calculator/loading" element={<CalculatorLoading />} />
           <Route path="/calculator/results" element={<CalculatorResults />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
