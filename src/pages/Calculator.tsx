@@ -10,7 +10,6 @@ import {
   Sparkles,
   Zap,
   Target,
-  Search,
   Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -72,7 +71,7 @@ const Calculator = () => {
   const boxTypes: BoxOption[] = [
     { value: "small", label: "Малая коробка (до 1 кг)" },
     { value: "medium", label: "Средняя коробка (до 5 кг)" },
-    { value: "large", label: "Большая коробка (до 25 кг)" },
+    { value: "large", label: "Большая коробка (��о 25 кг)" },
     { value: "envelope", label: "Конверт (до 500 г)" },
   ];
 
@@ -130,17 +129,6 @@ const Calculator = () => {
     setIsDark(!isDark);
     document.documentElement.classList.toggle("dark");
   };
-
-  const statsData = [
-    { value: "247", label: "Клиентов", color: "text-blue-400", icon: Target },
-    { value: "1286", label: "Товаров", color: "text-green-400", icon: Package },
-    {
-      value: "1.2M",
-      label: "На сумму",
-      color: "text-orange-400",
-      icon: TrendingUp,
-    },
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -221,8 +209,8 @@ const Calculator = () => {
         {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
       </motion.button>
 
-      {/* Main Content in Index page style */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center sm:justify-start sm:items-center p-4 max-w-md mx-auto">
+      {/* Main Content - Unified layout */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
           variants={containerVariants}
@@ -230,9 +218,9 @@ const Calculator = () => {
           animate="visible"
         >
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0 shadow-xl sm:flex sm:flex-col">
-              <CardHeader className="text-center relative pb-4 sm:pt-6 sm:justify-center sm:items-center sm:ml-auto">
-                {/* Product Icon */}
+            <Card className="glass-card border-0 shadow-xl">
+              <CardHeader className="text-center relative p-6">
+                {/* Product Icon - Unified size */}
                 <motion.div
                   className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
                   whileHover={{ scale: 1.02 }}
@@ -242,37 +230,33 @@ const Calculator = () => {
                   <CalculatorIcon className="w-8 h-8 text-white relative z-10" />
                 </motion.div>
 
-                <CardTitle className="text-lg font-bold text-foreground mb-2 leading-tight">
+                {/* Title - Unified typography */}
+                <CardTitle className="text-xl font-bold text-foreground mb-3">
                   Калькулятор WB
                 </CardTitle>
 
-                <div className="text-sm text-muted-foreground mb-4">
+                <CardDescription className="text-sm text-muted-foreground mb-6">
                   Расчет логистики и комиссий
-                </div>
+                </CardDescription>
               </CardHeader>
 
-              <CardContent className="pt-0 space-y-6 sm:mb-5">
-                {/* Search Section Placeholder */}
+              <CardContent className="p-6 pt-0 space-y-8">
+                {/* Product Parameters Section - Unified spacing */}
                 <motion.div variants={itemVariants}>
-                  <div />
-                </motion.div>
-
-                {/* Product Parameters Section */}
-                <motion.div variants={itemVariants}>
-                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-gradient-accent rounded-lg relative">
+                  <div className={`p-6 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center relative">
                         <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                        <Package className="w-4 h-4 text-white relative z-10" />
+                        <Package className="w-5 h-5 text-white relative z-10" />
                       </div>
-                      <h4 className="font-semibold text-foreground">
+                      <h4 className="text-lg font-semibold text-foreground">
                         Параметры товара
                       </h4>
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       {/* Marketplace */}
                       <div>
-                        <Label className="text-muted-foreground text-sm mb-2 block">
+                        <Label className="text-muted-foreground text-sm mb-3 block font-medium">
                           Маркетплейс
                         </Label>
                         <Select
@@ -282,7 +266,7 @@ const Calculator = () => {
                           }
                         >
                           <SelectTrigger
-                            className={`h-10 text-sm ${isDark ? "glass border-white/20 text-white" : "neu border-gray-200"}`}
+                            className={`h-12 text-sm ${isDark ? "glass border-white/20 text-white" : "neu border-gray-200"}`}
                           >
                             <SelectValue placeholder="Выберите маркетплейс" />
                           </SelectTrigger>
@@ -304,7 +288,7 @@ const Calculator = () => {
 
                       {/* Box Type */}
                       <div>
-                        <Label className="text-muted-foreground text-sm mb-2 block">
+                        <Label className="text-muted-foreground text-sm mb-3 block font-medium">
                           Коробка
                         </Label>
                         <Select
@@ -314,7 +298,7 @@ const Calculator = () => {
                           }
                         >
                           <SelectTrigger
-                            className={`h-10 text-sm ${isDark ? "glass border-white/20 text-white" : "neu border-gray-200"}`}
+                            className={`h-12 text-sm ${isDark ? "glass border-white/20 text-white" : "neu border-gray-200"}`}
                           >
                             <SelectValue placeholder="Выберите тип коробки" />
                           </SelectTrigger>
@@ -336,7 +320,7 @@ const Calculator = () => {
 
                       {/* Weight */}
                       <div>
-                        <Label className="text-muted-foreground text-sm mb-2 block">
+                        <Label className="text-muted-foreground text-sm mb-3 block font-medium">
                           Вес (кг)
                         </Label>
                         <Input
@@ -349,17 +333,17 @@ const Calculator = () => {
                               parseFloat(e.target.value) || 0,
                             )
                           }
-                          className={`h-10 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
+                          className={`h-12 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
                           placeholder="0.28"
                         />
                       </div>
 
                       {/* Dimensions */}
                       <div>
-                        <Label className="text-muted-foreground text-sm mb-2 block">
+                        <Label className="text-muted-foreground text-sm mb-3 block font-medium">
                           Габариты (см)
                         </Label>
-                        <div className="grid grid-cols-3 gap-2">
+                        <div className="grid grid-cols-3 gap-3">
                           <Input
                             type="number"
                             placeholder="Длина"
@@ -367,7 +351,7 @@ const Calculator = () => {
                             onChange={(e) =>
                               handleDimensionChange("length", e.target.value)
                             }
-                            className={`h-10 text-xs ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
+                            className={`h-12 text-xs ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
                           />
                           <Input
                             type="number"
@@ -376,7 +360,7 @@ const Calculator = () => {
                             onChange={(e) =>
                               handleDimensionChange("width", e.target.value)
                             }
-                            className={`h-10 text-xs ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
+                            className={`h-12 text-xs ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
                           />
                           <Input
                             type="number"
@@ -385,53 +369,53 @@ const Calculator = () => {
                             onChange={(e) =>
                               handleDimensionChange("height", e.target.value)
                             }
-                            className={`h-10 text-xs ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
+                            className={`h-12 text-xs ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
                           />
                         </div>
                       </div>
 
-                      {/* Quantity */}
-                      <div>
-                        <Label className="text-muted-foreground text-sm mb-2 block">
-                          Количество шт.
-                        </Label>
-                        <Input
-                          type="number"
-                          min="1"
-                          value={formData.quantity}
-                          onChange={(e) =>
-                            handleInputChange(
-                              "quantity",
-                              parseInt(e.target.value) || 1,
-                            )
-                          }
-                          className={`h-10 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
-                        />
-                      </div>
-
-                      {/* Price */}
-                      <div>
-                        <Label className="text-muted-foreground text-sm mb-2 block">
-                          Цена товара (₽)
-                        </Label>
-                        <Input
-                          type="number"
-                          min="0"
-                          value={formData.price}
-                          onChange={(e) =>
-                            handleInputChange(
-                              "price",
-                              parseFloat(e.target.value) || 0,
-                            )
-                          }
-                          className={`h-10 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
-                        />
+                      {/* Quantity and Price in two columns */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label className="text-muted-foreground text-sm mb-3 block font-medium">
+                            Количество шт.
+                          </Label>
+                          <Input
+                            type="number"
+                            min="1"
+                            value={formData.quantity}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "quantity",
+                                parseInt(e.target.value) || 1,
+                              )
+                            }
+                            className={`h-12 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
+                          />
+                        </div>
+                        <div>
+                          <Label className="text-muted-foreground text-sm mb-3 block font-medium">
+                            Цена товара (₽)
+                          </Label>
+                          <Input
+                            type="number"
+                            min="0"
+                            value={formData.price}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "price",
+                                parseFloat(e.target.value) || 0,
+                              )
+                            }
+                            className={`h-12 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Calculate Button */}
+                {/* Calculate Button - Unified height */}
                 <motion.div variants={itemVariants}>
                   <Button
                     onClick={handleCalculate}
@@ -459,33 +443,32 @@ const Calculator = () => {
                         </>
                       )}
                     </div>
-                    <div className="flex flex-row" />
                   </Button>
                 </motion.div>
 
-                {/* Statistics Section */}
+                {/* Statistics Section - Unified design */}
                 <motion.div variants={itemVariants}>
-                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-gradient-secondary rounded-lg relative">
+                  <div className={`p-6 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-gradient-secondary rounded-lg flex items-center justify-center relative">
                         <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                        <TrendingUp className="w-4 h-4 text-white relative z-10" />
+                        <TrendingUp className="w-5 h-5 text-white relative z-10" />
                       </div>
-                      <h4 className="font-semibold text-foreground">
+                      <h4 className="text-lg font-semibold text-foreground">
                         Статистика приложения
                       </h4>
                     </div>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-3 gap-4">
                       <motion.div
-                        className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-3 cursor-pointer`}
+                        className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-4 cursor-pointer`}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8, duration: 0.5 }}
                         whileHover={{ scale: 1.02 }}
                       >
-                        <div className="w-6 h-6 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center relative">
+                        <div className="w-8 h-8 mx-auto mb-3 rounded-lg bg-gradient-primary flex items-center justify-center relative">
                           <div className="absolute inset-0 rounded-lg border border-white/30" />
-                          <Target className="w-3 h-3 text-white relative z-10" />
+                          <Target className="w-4 h-4 text-white relative z-10" />
                         </div>
                         <div className="text-xl font-bold text-blue-400 mb-1">
                           247
@@ -495,15 +478,15 @@ const Calculator = () => {
                         </div>
                       </motion.div>
                       <motion.div
-                        className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-3 cursor-pointer`}
+                        className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-4 cursor-pointer`}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.9, duration: 0.5 }}
                         whileHover={{ scale: 1.02 }}
                       >
-                        <div className="w-6 h-6 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center relative">
+                        <div className="w-8 h-8 mx-auto mb-3 rounded-lg bg-gradient-primary flex items-center justify-center relative">
                           <div className="absolute inset-0 rounded-lg border border-white/30" />
-                          <Package className="w-3 h-3 text-white relative z-10" />
+                          <Package className="w-4 h-4 text-white relative z-10" />
                         </div>
                         <div className="text-xl font-bold text-green-400 mb-1">
                           1286
@@ -513,21 +496,21 @@ const Calculator = () => {
                         </div>
                       </motion.div>
                       <motion.div
-                        className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-3 cursor-pointer`}
+                        className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-4 cursor-pointer`}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.0, duration: 0.5 }}
                         whileHover={{ scale: 1.02 }}
                       >
-                        <div className="w-6 h-6 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center relative">
+                        <div className="w-8 h-8 mx-auto mb-3 rounded-lg bg-gradient-primary flex items-center justify-center relative">
                           <div className="absolute inset-0 rounded-lg border border-white/30" />
-                          <TrendingUp className="w-3 h-3 text-white relative z-10" />
+                          <TrendingUp className="w-4 h-4 text-white relative z-10" />
                         </div>
                         <div className="text-xl font-bold text-orange-400 mb-1">
                           1.2M
                         </div>
                         <div className="text-muted-foreground text-xs">
-                          На сумму
+                          На ��умму
                         </div>
                       </motion.div>
                     </div>
