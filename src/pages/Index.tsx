@@ -161,7 +161,7 @@ const Index = () => {
                     backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
                   }}
                 >
-                  {/* Final Logo Replica */}
+                  {/* Clean Logo Replica */}
                   <svg
                     width="50"
                     height="50"
@@ -172,75 +172,66 @@ const Index = () => {
                     <circle
                       cx="50"
                       cy="50"
-                      r="47"
+                      r="46"
                       fill="none"
                       stroke="white"
                       strokeWidth="3"
                     />
 
-                    {/* Vertical stem of 't' */}
-                    <path
-                      d="M30 18
-                         L30 79
-                         C30 81 32 83 34 83
-                         L38 83
-                         C40 83 42 81 42 79
-                         L42 18
-                         C42 16 40 14 38 14
-                         L34 14
-                         C32 14 30 16 30 18 Z"
+                    {/* Vertical stem */}
+                    <rect
+                      x="30"
+                      y="17"
+                      width="10"
+                      height="66"
+                      rx="5"
                       fill="white"
                     />
 
-                    {/* Flowing banner/ribbon */}
+                    {/* Flowing horizontal ribbon */}
                     <path
-                      d="M25 30
-                         C24 28 25 26 27 26
-                         L82 30
-                         C85 31 86 34 85 37
-                         C84 40 81 42 78 43
-                         C75 44 71 44 67 43
-                         C63 42 59 40 55 38
-                         C51 36 47 34 43 33
-                         C39 32 35 31 31 31
-                         C28 31 26 30 25 30 Z"
+                      d="M25 32
+                         Q 25 30 27 30
+                         L 85 32
+                         Q 87 33 86 36
+                         Q 85 39 82 40
+                         Q 78 41 74 40
+                         L 65 38
+                         Q 55 36 45 34
+                         L 35 32
+                         Q 30 31 27 31
+                         Q 25 31 25 32 Z"
                       fill="white"
                     />
 
-                    {/* Banner shadow/depth */}
+                    {/* Ribbon shadow */}
                     <path
-                      d="M30 33
-                         L75 35
-                         C78 35 80 37 79 39
-                         C78 41 75 42 72 42
-                         C68 42 64 41 60 40
-                         C56 39 52 37 48 36
-                         C44 35 40 34 36 34
-                         C33 34 30 33 30 33 Z"
-                      fill="rgba(255,255,255,0.7)"
+                      d="M30 34
+                         L 78 36
+                         Q 80 37 79 38
+                         Q 78 39 76 39
+                         L 65 38
+                         Q 55 37 45 35
+                         L 35 34
+                         Q 32 34 30 34 Z"
+                      fill="white"
+                      opacity="0.6"
                     />
 
-                    {/* Bottom horizontal base */}
+                    {/* Bottom base */}
                     <path
-                      d="M30 68
-                         L72 68
-                         C76 68 80 70 80 74
-                         C80 78 76 80 72 80
-                         L34 80
-                         C32 80 30 78 30 76
-                         L30 68 Z"
+                      d="M30 70
+                         L 75 70
+                         Q 78 70 78 73
+                         Q 78 76 75 76
+                         L 35 76
+                         Q 30 76 30 73
+                         Q 30 70 30 70 Z"
                       fill="white"
                     />
 
-                    {/* Rounded end for base */}
-                    <path
-                      d="M72 68
-                         C78 68 82 70 82 74
-                         C82 78 78 80 72 80
-                         C76 80 80 78 80 74
-                         C80 70 76 68 72 68 Z"
-                      fill="white"
-                    />
+                    {/* Rounded end */}
+                    <circle cx="75" cy="73" r="3" fill="white" />
                   </svg>
                 </motion.div>
 
