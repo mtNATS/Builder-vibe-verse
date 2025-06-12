@@ -4,25 +4,19 @@ import {
   ArrowLeft,
   Package,
   Star,
-  Heart,
-  Share2,
   Eye,
   Moon,
   Sun,
   Sparkles,
   BarChart3,
-  ShoppingCart,
   Award,
   Truck,
   Shield,
-  MapPin,
-  Calendar,
   Info,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ProductInfo } from "@/types/calculator";
 
@@ -60,7 +54,7 @@ const ProductDetails = () => {
     category: "Спортивное питание",
     brand: "Layers",
     description:
-      "Протеиновые батончики Layers - это идеальный выбор для тех, кто следит за своим здоровьем и фигурой. Без добавления сахара, с высоким содер��анием белка и отличным вкусом. Каждый батончик содержит 20г высококачественного белка и всего 180 калорий.",
+      "Протеиновые батончики Layers - это идеальный выбор для тех, кто следит за своим здоровьем и фигурой. Без добавления сахара, с высоким содержанием белка и отличным вкусом. Каждый батончик содержит 20г высококачественн��го белка и всего 180 калорий.",
     images: [
       "/api/placeholder/400/400",
       "/api/placeholder/400/400",
@@ -244,29 +238,6 @@ const ProductDetails = () => {
                   >
                     <Package className="w-10 h-10 text-white" />
                   </motion.div>
-
-                  {/* Floating action buttons */}
-                  <motion.div
-                    className="absolute top-4 right-4 flex gap-2"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.8 }}
-                  >
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="w-10 h-10 glass-button rounded-full"
-                    >
-                      <Heart className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="w-10 h-10 glass-button rounded-full"
-                    >
-                      <Share2 className="w-4 h-4" />
-                    </Button>
-                  </motion.div>
                 </motion.div>
 
                 {/* Product Info Section */}
@@ -290,7 +261,7 @@ const ProductDetails = () => {
                   </div>
 
                   {/* Rating, Reviews and Price */}
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div
                         className={`flex items-center gap-1 ${isDark ? "glass" : "neu"} rounded-full px-3 py-2`}
@@ -308,27 +279,21 @@ const ProductDetails = () => {
                       {formatCurrency(product.price)}
                     </div>
                   </div>
-
-                  {/* Action Buttons */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <Button
-                      className="h-12 bg-gradient-primary text-white font-semibold"
-                      onClick={() => console.log("Add to cart")}
-                    >
-                      <ShoppingCart className="w-4 h-4 mr-2" />В корзину
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className={`h-12 ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
-                      onClick={() => console.log("View analytics")}
-                    >
-                      <BarChart3 className="w-4 h-4 mr-2" />
-                      Аналитика
-                    </Button>
-                  </div>
                 </div>
               </CardContent>
             </Card>
+          </motion.div>
+
+          {/* Analytics Button - отдельно от основной карточки */}
+          <motion.div variants={itemVariants}>
+            <Button
+              variant="outline"
+              className={`w-full h-12 text-sm ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
+              onClick={() => console.log("View analytics")}
+            >
+              <BarChart3 className="w-4 h-4 mr-2" />
+              Аналитика товара
+            </Button>
           </motion.div>
 
           {/* Product Details */}
