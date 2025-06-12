@@ -158,19 +158,6 @@ const CalculatorResults = () => {
         />
       </div>
 
-      {/* Theme Toggle */}
-      <motion.button
-        onClick={toggleTheme}
-        className="absolute top-6 right-6 z-50 p-3 glass-button text-foreground"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-      </motion.button>
-
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -199,7 +186,7 @@ const CalculatorResults = () => {
       </motion.div>
 
       {/* Main Content in Index page style */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
+      <div className="relative z-10 min-h-screen flex flex-col justify-center sm:justify-start sm:items-center p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
           variants={containerVariants}
@@ -207,8 +194,8 @@ const CalculatorResults = () => {
           animate="visible"
         >
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0 shadow-xl">
-              <CardHeader className="text-center relative pb-4">
+            <Card className="glass-card border-0 shadow-xl sm:flex sm:flex-col">
+              <CardHeader className="text-center relative pb-4 sm:pt-6 sm:justify-center sm:items-center sm:ml-auto">
                 {/* Success sparkle */}
                 <motion.div
                   className="absolute -top-2 -right-2"
@@ -264,7 +251,7 @@ const CalculatorResults = () => {
                 </div>
               </CardHeader>
 
-              <CardContent className="pt-0 space-y-6">
+              <CardContent className="pt-0 space-y-6 sm:mb-5">
                 {/* Action Buttons */}
                 <motion.div
                   variants={itemVariants}
