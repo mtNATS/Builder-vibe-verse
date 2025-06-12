@@ -19,6 +19,8 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useNavigate, useLocation } from "react-router-dom";
 import { CalculationResults } from "@/types/calculator";
+import ProductCard from "@/components/ProductCard";
+import SellerCard from "@/components/SellerCard";
 
 const CalculatorResults = () => {
   const navigate = useNavigate();
