@@ -196,21 +196,6 @@ const CalculatorResults = () => {
           <motion.div variants={itemVariants}>
             <Card className="glass-card border-0 shadow-xl sm:flex sm:flex-col">
               <CardHeader className="text-center relative pb-4 sm:pt-6 sm:justify-center sm:items-center sm:ml-auto">
-                {/* Success sparkle */}
-                <motion.div
-                  className="absolute -top-2 -right-2"
-                  animate={{
-                    rotate: [0, 360],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                >
-                  <Sparkles className="w-4 h-4 text-green-500 opacity-80" />
-                </motion.div>
-
                 {/* Product Info Header */}
                 <motion.div
                   className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
@@ -269,7 +254,9 @@ const CalculatorResults = () => {
                 {/* Detailed Breakdown */}
                 <motion.div variants={itemVariants} className="space-y-4">
                   {/* Logistics Details */}
-                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                  <div
+                    className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg sm:flex sm:flex-col sm:items-stretch`}
+                  >
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2 bg-gradient-accent rounded-lg relative">
                         <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
