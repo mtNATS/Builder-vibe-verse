@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -38,7 +38,7 @@ const CalculatorResults = () => {
       supplierCommissionPercent: 15.5,
     },
     productInfo: {
-      title: "Протеиновые батончики без сахара Layers Ассорти, 4шт х 60г",
+      title: "Протеиновые батончики без сахара Layers Ассорти, 4ш�� х 60г",
       price: 435,
       rating: 4.8,
       reviewCount: 5247,
@@ -47,6 +47,15 @@ const CalculatorResults = () => {
 
   // Safely extract results with fallback
   const results = location.state?.results || defaultResults;
+  const hasValidData = !!location.state?.results;
+
+  useEffect(() => {
+    // If user navigated directly to results without going through the form,
+    // we still show fallback data but could optionally redirect
+    if (!hasValidData) {
+      console.warn("No calculation data found, using fallback data");
+    }
+  }, [hasValidData]);
 
   const goBack = () => {
     navigate("/calculator/form");
