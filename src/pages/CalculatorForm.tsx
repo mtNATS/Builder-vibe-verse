@@ -76,7 +76,6 @@ const CalculatorForm = () => {
   const handleCalculate = async () => {
     setIsLoading(true);
 
-    // Navigate to loading screen first
     navigate("/calculator/loading", {
       state: {
         formData,
@@ -94,7 +93,8 @@ const CalculatorForm = () => {
             supplierCommissionPercent: 15.5,
           },
           productInfo: {
-            title: "Протеиновые батончики без сахара Layers Ассорти, 4шт х 60г",
+            title:
+              "Протеиновые батончики без сахара Layers Ассорти, 4��т х 60г",
             price: formData.price,
             rating: 4.8,
             reviewCount: 5247,
@@ -113,7 +113,7 @@ const CalculatorForm = () => {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         staggerChildren: 0.1,
       },
     },
@@ -124,7 +124,7 @@ const CalculatorForm = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.5, ease: "easeOut" },
     },
   };
 
@@ -133,107 +133,79 @@ const CalculatorForm = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-primary opacity-20 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-gradient-primary opacity-20 blur-3xl"
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 15, repeat: Infinity }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-accent opacity-15 blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            x: [0, 50, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 5,
-          }}
+          className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-gradient-accent opacity-15 blur-3xl"
+          animate={{ x: [0, 25, 0] }}
+          transition={{ duration: 20, repeat: Infinity }}
         />
       </div>
 
-      <div className="relative min-h-screen max-w-md mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative z-10 p-6 pb-4"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={goBack}
-              className="glass-button text-white hover:bg-white/20 rounded-full hover-lift"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-            <motion.h1
-              className="text-xl font-semibold text-white text-glow-soft"
-              animate={{
-                textShadow: [
-                  "0 0 10px rgba(255,255,255,0.5)",
-                  "0 0 20px rgba(102,126,234,0.5)",
-                  "0 0 10px rgba(255,255,255,0.5)",
-                ],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              WB Калькулятор
-            </motion.h1>
-            <div className="w-10"></div>
-          </div>
-          <p className="text-white/80 text-center">Поиск и расчет затрат</p>
-        </motion.div>
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative z-10 p-4 pb-2"
+      >
+        <div className="flex items-center justify-between mb-4 max-w-md mx-auto">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={goBack}
+            className="glass-button text-white hover:bg-white/20 rounded-full"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Button>
+          <h1 className="text-lg font-semibold text-white">WB Калькулятор</h1>
+          <div className="w-10"></div>
+        </div>
+        <p className="text-white/70 text-center text-sm max-w-md mx-auto">
+          Поиск и расчет затрат
+        </p>
+      </motion.div>
 
-        {/* Content */}
+      {/* Content */}
+      <div className="relative z-10 px-4 pb-6 max-w-md mx-auto">
         <motion.div
-          className="relative z-10 px-6 pb-6 space-y-6 custom-scrollbar"
+          className="space-y-4"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Search Section */}
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0 hover-lift">
-              <CardHeader className="pb-4">
+            <Card className="glass-card border-0">
+              <CardHeader className="pb-3">
                 <div className="flex items-center gap-3">
-                  <motion.div
-                    className="p-3 bg-gradient-primary rounded-xl"
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <Search className="w-5 h-5 text-white" />
-                  </motion.div>
-                  <CardTitle className="text-white text-lg">
+                  <div className="p-2 bg-gradient-primary rounded-lg relative">
+                    <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
+                    <Search className="w-4 h-4 text-white relative z-10" />
+                  </div>
+                  <CardTitle className="text-white text-base">
                     Поиск товара
                   </CardTitle>
                   <motion.div
                     animate={{ rotate: [0, 360] }}
                     transition={{ duration: 4, repeat: Infinity }}
                   >
-                    <Sparkles className="w-4 h-4 text-white/60" />
+                    <Sparkles className="w-3 h-3 text-white/60" />
                   </motion.div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3 pt-0">
                 <div className="space-y-2">
-                  <Label className="text-white/90 font-medium">
+                  <Label className="text-white/90 font-medium text-sm">
                     Артикул или ссылка
                   </Label>
                   <Input
                     placeholder="Введите артикул товара"
-                    className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-12"
+                    className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-10"
                   />
                 </div>
-                <Button className="w-full bg-gradient-primary hover:bg-gradient-secondary border-0 text-white font-medium h-12 hover-lift">
+                <Button className="w-full bg-gradient-primary hover:bg-gradient-secondary border-0 text-white font-medium h-10">
                   <Search className="w-4 h-4 mr-2" />
                   Найти товар
                 </Button>
@@ -243,29 +215,22 @@ const CalculatorForm = () => {
 
           {/* Form Section */}
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0 hover-lift">
-              <CardHeader className="pb-4">
+            <Card className="glass-card border-0">
+              <CardHeader className="pb-3">
                 <div className="flex items-center gap-3">
-                  <motion.div
-                    className="p-3 bg-gradient-accent rounded-xl"
-                    whileHover={{ rotate: -360, scale: 1.1 }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    <Package className="w-5 h-5 text-white" />
-                  </motion.div>
-                  <CardTitle className="text-white text-lg">
+                  <div className="p-2 bg-gradient-accent rounded-lg relative">
+                    <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
+                    <Package className="w-4 h-4 text-white relative z-10" />
+                  </div>
+                  <CardTitle className="text-white text-base">
                     Параметры товара
                   </CardTitle>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4 pt-0">
                 {/* Marketplace */}
-                <motion.div
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Label className="text-white/90 font-medium">
+                <div className="space-y-2">
+                  <Label className="text-white/90 font-medium text-sm">
                     Маркетплейс
                   </Label>
                   <Select
@@ -274,7 +239,7 @@ const CalculatorForm = () => {
                       handleInputChange("marketplace", value)
                     }
                   >
-                    <SelectTrigger className="glass-input text-white h-12 border-white/20 focus:border-primary/50">
+                    <SelectTrigger className="glass-input text-white h-10 border-white/20 focus:border-primary/50">
                       <SelectValue placeholder="Выберите маркетплейс" />
                     </SelectTrigger>
                     <SelectContent className="glass-intense border-white/20">
@@ -289,20 +254,18 @@ const CalculatorForm = () => {
                       ))}
                     </SelectContent>
                   </Select>
-                </motion.div>
+                </div>
 
                 {/* Box Type */}
-                <motion.div
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Label className="text-white/90 font-medium">Коробка</Label>
+                <div className="space-y-2">
+                  <Label className="text-white/90 font-medium text-sm">
+                    Коробка
+                  </Label>
                   <Select
                     value={formData.box}
                     onValueChange={(value) => handleInputChange("box", value)}
                   >
-                    <SelectTrigger className="glass-input text-white h-12 border-white/20 focus:border-primary/50">
+                    <SelectTrigger className="glass-input text-white h-10 border-white/20 focus:border-primary/50">
                       <SelectValue placeholder="Выберите тип коробки" />
                     </SelectTrigger>
                     <SelectContent className="glass-intense border-white/20">
@@ -317,15 +280,13 @@ const CalculatorForm = () => {
                       ))}
                     </SelectContent>
                   </Select>
-                </motion.div>
+                </div>
 
                 {/* Weight */}
-                <motion.div
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Label className="text-white/90 font-medium">Вес (кг)</Label>
+                <div className="space-y-2">
+                  <Label className="text-white/90 font-medium text-sm">
+                    Вес (кг)
+                  </Label>
                   <Input
                     type="number"
                     step="0.01"
@@ -336,21 +297,17 @@ const CalculatorForm = () => {
                         parseFloat(e.target.value) || 0,
                       )
                     }
-                    className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-12"
+                    className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-10"
                     placeholder="0.28"
                   />
-                </motion.div>
+                </div>
 
                 {/* Dimensions */}
-                <motion.div
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Label className="text-white/90 font-medium">
+                <div className="space-y-2">
+                  <Label className="text-white/90 font-medium text-sm">
                     Габариты (см)
                   </Label>
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-2">
                     <Input
                       type="number"
                       placeholder="Длина"
@@ -358,7 +315,7 @@ const CalculatorForm = () => {
                       onChange={(e) =>
                         handleDimensionChange("length", e.target.value)
                       }
-                      className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-12 text-sm"
+                      className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-10 text-sm"
                     />
                     <Input
                       type="number"
@@ -367,7 +324,7 @@ const CalculatorForm = () => {
                       onChange={(e) =>
                         handleDimensionChange("width", e.target.value)
                       }
-                      className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-12 text-sm"
+                      className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-10 text-sm"
                     />
                     <Input
                       type="number"
@@ -376,18 +333,14 @@ const CalculatorForm = () => {
                       onChange={(e) =>
                         handleDimensionChange("height", e.target.value)
                       }
-                      className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-12 text-sm"
+                      className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-10 text-sm"
                     />
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Quantity */}
-                <motion.div
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Label className="text-white/90 font-medium">
+                <div className="space-y-2">
+                  <Label className="text-white/90 font-medium text-sm">
                     Количество шт.
                   </Label>
                   <Input
@@ -400,17 +353,13 @@ const CalculatorForm = () => {
                         parseInt(e.target.value) || 1,
                       )
                     }
-                    className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-12"
+                    className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-10"
                   />
-                </motion.div>
+                </div>
 
                 {/* Price */}
-                <motion.div
-                  className="space-y-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Label className="text-white/90 font-medium">
+                <div className="space-y-2">
+                  <Label className="text-white/90 font-medium text-sm">
                     Цена товара (₽)
                   </Label>
                   <Input
@@ -423,45 +372,29 @@ const CalculatorForm = () => {
                         parseFloat(e.target.value) || 0,
                       )
                     }
-                    className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-12"
+                    className="glass-input text-white placeholder:text-white/60 border-white/20 focus:border-primary/50 h-10"
                   />
-                </motion.div>
+                </div>
 
                 {/* Calculate Button */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <Button
+                  onClick={handleCalculate}
+                  disabled={isLoading || !formData.marketplace || !formData.box}
+                  className="w-full bg-gradient-secondary hover:bg-gradient-primary border-0 text-white font-bold h-12 text-base relative overflow-hidden group"
                 >
-                  <Button
-                    onClick={handleCalculate}
-                    disabled={
-                      isLoading || !formData.marketplace || !formData.box
-                    }
-                    className="w-full bg-gradient-secondary hover:bg-gradient-primary border-0 text-white font-bold h-14 text-lg relative overflow-hidden group pulse-glow"
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="w-5 h-5 mr-3 animate-spin" />
-                        Анализ данных...
-                      </>
-                    ) : (
-                      <>
-                        <Zap className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform duration-300" />
-                        Рассчитать логистику
-                        <Calculator className="w-5 h-5 ml-3 group-hover:scale-110 transition-transform duration-300" />
-                      </>
-                    )}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                      animate={{ x: [-100, 300] }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    />
-                  </Button>
-                </motion.div>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Анализ данных...
+                    </>
+                  ) : (
+                    <>
+                      <Zap className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                      Рассчитать логистику
+                      <Calculator className="w-4 h-4 ml-2 group-hover:scale-110 transition-transform duration-300" />
+                    </>
+                  )}
+                </Button>
               </CardContent>
             </Card>
           </motion.div>
