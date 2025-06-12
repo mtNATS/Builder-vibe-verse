@@ -12,6 +12,7 @@ import CalculationHistory from "./pages/CalculationHistory";
 import ProductDetails from "./pages/ProductDetails";
 import SellerDetails from "./pages/SellerDetails";
 import Feedback from "./pages/Feedback";
+import CardsDemo from "./pages/CardsDemo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
