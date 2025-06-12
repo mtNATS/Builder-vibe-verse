@@ -476,35 +476,60 @@ const Calculator = () => {
                       </h4>
                     </div>
                     <div className="grid grid-cols-3 gap-3">
-                      {statsData.map((stat, index) => {
-                        const IconComponent = stat.icon;
-                        return (
-                          <motion.div
-                            key={stat.label}
-                            className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-3 cursor-pointer`}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{
-                              delay: 0.8 + index * 0.1,
-                              duration: 0.5,
-                            }}
-                            whileHover={{ scale: 1.02 }}
-                          >
-                            <div className="w-6 h-6 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center relative">
-                              <div className="absolute inset-0 rounded-lg border border-white/30" />
-                              <IconComponent className="w-3 h-3 text-white relative z-10" />
-                            </div>
-                            <div
-                              className={`text-xl font-bold ${stat.color} mb-1`}
-                            >
-                              {stat.value}
-                            </div>
-                            <div className="text-muted-foreground text-xs">
-                              {stat.label}
-                            </div>
-                          </motion.div>
-                        );
-                      })}
+                      <motion.div
+                        className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-3 cursor-pointer`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8, duration: 0.5 }}
+                        whileHover={{ scale: 1.02 }}
+                      >
+                        <div className="w-6 h-6 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center relative">
+                          <div className="absolute inset-0 rounded-lg border border-white/30" />
+                          <Target className="w-3 h-3 text-white relative z-10" />
+                        </div>
+                        <div className="text-xl font-bold text-blue-400 mb-1">
+                          247
+                        </div>
+                        <div className="text-muted-foreground text-xs">
+                          Клиентов
+                        </div>
+                      </motion.div>
+                      <motion.div
+                        className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-3 cursor-pointer`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.9, duration: 0.5 }}
+                        whileHover={{ scale: 1.02 }}
+                      >
+                        <div className="w-6 h-6 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center relative">
+                          <div className="absolute inset-0 rounded-lg border border-white/30" />
+                          <Package className="w-3 h-3 text-white relative z-10" />
+                        </div>
+                        <div className="text-xl font-bold text-green-400 mb-1">
+                          1286
+                        </div>
+                        <div className="text-muted-foreground text-xs">
+                          Товаров
+                        </div>
+                      </motion.div>
+                      <motion.div
+                        className={`text-center ${isDark ? "glass" : "neu"} rounded-lg p-3 cursor-pointer`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.0, duration: 0.5 }}
+                        whileHover={{ scale: 1.02 }}
+                      >
+                        <div className="w-6 h-6 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center relative">
+                          <div className="absolute inset-0 rounded-lg border border-white/30" />
+                          <TrendingUp className="w-3 h-3 text-white relative z-10" />
+                        </div>
+                        <div className="text-xl font-bold text-orange-400 mb-1">
+                          1.2M
+                        </div>
+                        <div className="text-muted-foreground text-xs">
+                          На сумму
+                        </div>
+                      </motion.div>
                     </div>
                   </div>
                 </motion.div>
