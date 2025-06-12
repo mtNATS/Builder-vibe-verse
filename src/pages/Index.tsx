@@ -161,7 +161,7 @@ const Index = () => {
                     backgroundColor: "rgb(156, 163, 175)", // gray-400 equivalent
                   }}
                 >
-                  {/* Perfect Logo Replica */}
+                  {/* Pixel-Perfect Logo */}
                   <svg
                     width="50"
                     height="50"
@@ -172,60 +172,74 @@ const Index = () => {
                     <circle
                       cx="50"
                       cy="50"
-                      r="46.5"
+                      r="46"
                       fill="none"
                       stroke="white"
                       strokeWidth="3"
                     />
 
-                    {/* Main vertical stem */}
+                    {/* Vertical stem of 't' */}
                     <rect
                       x="30"
                       y="18"
-                      width="9"
+                      width="8"
                       height="64"
-                      rx="4.5"
+                      rx="4"
                       fill="white"
                     />
 
-                    {/* Flowing horizontal banner/ribbon */}
+                    {/* Flowing banner/ribbon - top curve */}
                     <path
                       d="M24 32
-                         C 23 30.5 24 29 26 29
-                         L 82 31
-                         C 85 31.5 86 34 85 37
-                         C 84 40 81 42 78 42.5
-                         C 74 43 69 42 64 40.5
-                         C 58 39 52 37 46 35.5
-                         C 40 34 34 33 28 32.5
-                         C 26 32 24 32 24 32 Z"
+                         C 23 30 24 28 26 28
+                         L 84 30
+                         C 87 30.5 88 32 87 35
+                         C 86 38 83 40 80 40.5
+                         C 76 41 71 40 66 38.5
+                         C 60 37 54 35 48 33.5
+                         C 42 32 36 31 30 30.5
+                         C 27 30 25 30.5 24 32 Z"
                       fill="white"
                     />
 
-                    {/* Banner depth/shadow */}
+                    {/* Banner bottom curve */}
                     <path
-                      d="M30 34
-                         C 45 35 60 36 75 38
-                         C 77 38.5 78 39 77 40
-                         C 76 41 74 41 72 40.5
-                         C 65 39 58 37.5 51 36
-                         C 44 34.5 37 34 30 34 Z"
+                      d="M24 38
+                         C 23.5 40 24.5 42 27 42
+                         L 84 40
+                         C 87 39.5 88 37 87 34
+                         C 86 31 83 29 80 29.5
+                         C 76 30 71 31 66 32.5
+                         C 60 34 54 36 48 37.5
+                         C 42 39 36 40 30 40.5
+                         C 27 41 25 39.5 24 38 Z"
                       fill="white"
-                      opacity="0.7"
+                    />
+
+                    {/* Banner shadow for depth */}
+                    <path
+                      d="M30 35
+                         L 75 36
+                         C 78 36 79 37 78 38
+                         C 77 39 75 39 72 38.5
+                         C 65 37.5 58 36.5 51 35.5
+                         C 44 34.5 37 34.5 30 35 Z"
+                      fill="white"
+                      opacity="0.6"
                     />
 
                     {/* Bottom horizontal base */}
                     <rect
                       x="30"
-                      y="69"
-                      width="44"
-                      height="9"
-                      rx="4.5"
+                      y="70"
+                      width="42"
+                      height="8"
+                      rx="4"
                       fill="white"
                     />
 
-                    {/* Rounded end cap */}
-                    <circle cx="74" cy="73.5" r="4.5" fill="white" />
+                    {/* Rounded end */}
+                    <circle cx="72" cy="74" r="4" fill="white" />
                   </svg>
                 </motion.div>
 
