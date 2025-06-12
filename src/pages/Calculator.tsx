@@ -36,7 +36,7 @@ const Calculator = () => {
   };
 
   const statsData = [
-    { value: "247", label: "Клиентов", color: "text-blue-400", icon: Target },
+    { value: "247", label: "Клиен��ов", color: "text-blue-400", icon: Target },
     { value: "1286", label: "Товаров", color: "text-green-400", icon: Package },
     {
       value: "1.2M",
@@ -51,56 +51,54 @@ const Calculator = () => {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.8,
-        staggerChildren: 0.2,
+        duration: 0.6,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.5, ease: "easeOut" },
     },
   };
 
   return (
     <div className="min-h-screen morph-bg relative overflow-hidden">
-      {/* Enhanced Background Effects */}
+      {/* Simplified Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Animated gradient orbs */}
+        {/* Reduced intensity gradient orbs */}
         <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-primary opacity-30 blur-3xl"
+          className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-primary opacity-20 blur-3xl"
+          animate={{
+            scale: [1, 1.1, 1],
+            x: [0, 25, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-accent opacity-15 blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, -30, 0],
+            x: [0, -20, 0],
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
             ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-accent opacity-25 blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 5,
+            delay: 3,
           }}
         />
 
-        {/* Floating particles */}
-        {[...Array(20)].map((_, i) => (
+        {/* Reduced floating particles */}
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white/20 rounded-full"
@@ -109,13 +107,13 @@ const Calculator = () => {
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
+              y: [0, -50, 0],
+              opacity: [0, 0.6, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 4 + Math.random() * 2,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: Math.random() * 3,
             }}
           />
         ))}
@@ -124,12 +122,12 @@ const Calculator = () => {
       {/* Theme Toggle */}
       <motion.button
         onClick={toggleTheme}
-        className="absolute top-6 right-6 z-50 p-3 glass-button text-white hover-lift pulse-glow"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        initial={{ opacity: 0, rotate: -180 }}
+        className="absolute top-6 right-6 z-50 p-3 glass-button text-white"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, rotate: -90 }}
         animate={{ opacity: 1, rotate: 0 }}
-        transition={{ delay: 0.5, type: "spring" }}
+        transition={{ delay: 0.3 }}
       >
         {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
       </motion.button>
@@ -141,73 +139,60 @@ const Calculator = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* App Icon with enhanced effects */}
+          {/* App Icon with refined effects */}
           <motion.div variants={itemVariants} className="text-center mb-8">
             <motion.div
-              className="w-24 h-24 glass-intense rounded-3xl flex items-center justify-center mx-auto mb-6 relative overflow-hidden hover-lift"
-              whileHover={{ scale: 1.1 }}
+              className="w-24 h-24 glass-intense rounded-3xl flex items-center justify-center mx-auto mb-6 relative overflow-hidden"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              animate={{
-                boxShadow: [
-                  "0 20px 40px -15px rgba(102, 126, 234, 0.4)",
-                  "0 25px 50px -15px rgba(102, 126, 234, 0.6)",
-                  "0 20px 40px -15px rgba(102, 126, 234, 0.4)",
-                ],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
             >
               <div className="absolute inset-0 bg-gradient-primary opacity-90 rounded-3xl" />
               <motion.div
                 animate={{ rotate: [0, 360] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
                 className="relative z-10"
               >
                 <ArrowRight className="w-12 h-12 text-white" />
               </motion.div>
 
-              {/* Sparkle effects */}
+              {/* Simplified sparkle */}
               <motion.div
                 className="absolute top-2 right-2"
                 animate={{
-                  scale: [1, 1.5, 1],
-                  rotate: [0, 180, 360],
+                  scale: [1, 1.2, 1],
                 }}
-                transition={{ duration: 2, repeat: Infinity }}
+                transition={{ duration: 3, repeat: Infinity }}
               >
                 <Sparkles className="w-3 h-3 text-white/60" />
               </motion.div>
             </motion.div>
 
-            {/* App Title with enhanced styling */}
+            {/* App Title */}
             <motion.div variants={itemVariants}>
-              <h1 className="text-4xl font-bold text-white mb-2 text-glow-soft">
+              <h1 className="text-4xl font-bold text-white mb-2">
                 Wildberries
               </h1>
               <h2 className="text-3xl font-semibold bg-gradient-accent bg-clip-text text-transparent mb-4">
                 Калькулятор
               </h2>
               <p className="text-white/80 text-lg leading-relaxed max-w-sm mx-auto">
-                Рассчитайте логистич��ские затраты и комиссии для ваших товаров
+                Рассчитайте логистические затраты и комиссии для ваших товаров
                 на маркетплейсах
               </p>
             </motion.div>
           </motion.div>
 
-          {/* Start Button with enhanced effects */}
+          {/* Start Button */}
           <motion.div variants={itemVariants} className="mb-8">
             <Button
               onClick={handleStartCalculation}
               className="w-full h-16 glass-intense text-slate-900 font-bold text-xl rounded-2xl relative overflow-hidden group bg-white/90 hover:bg-white border-0"
               size="lg"
             >
-              <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-              <motion.div
-                className="flex items-center justify-center relative z-10"
-                whileHover={{ scale: 1.05 }}
-              >
+              <motion.div className="flex items-center justify-center relative z-10">
                 <Zap className="w-6 h-6 mr-3 group-hover:text-primary transition-colors" />
                 Начать работу
-                <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-0.5 transition-transform duration-200" />
               </motion.div>
             </Button>
           </motion.div>
@@ -215,16 +200,12 @@ const Calculator = () => {
           {/* Feature Cards */}
           <motion.div variants={itemVariants} className="space-y-4">
             {/* Search Section */}
-            <Card className="glass-card border-0 text-white hover-lift">
+            <Card className="glass-card border-0 text-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                  <motion.div
-                    className="p-3 bg-gradient-primary rounded-xl"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                  >
+                  <div className="p-3 bg-gradient-primary rounded-xl">
                     <Package className="w-6 h-6 text-white" />
-                  </motion.div>
+                  </div>
                   <CardTitle className="text-xl">Поиск товара</CardTitle>
                 </div>
               </CardHeader>
@@ -235,7 +216,7 @@ const Calculator = () => {
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                       animate={{ x: [-100, 300] }}
                       transition={{
-                        duration: 2,
+                        duration: 3,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
@@ -247,21 +228,18 @@ const Calculator = () => {
             </Card>
 
             {/* Recent Calculations */}
-            <Card className="glass-card border-0 text-white hover-lift">
+            <Card className="glass-card border-0 text-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <motion.div
-                      className="p-3 bg-gradient-accent rounded-xl"
-                      whileHover={{ scale: 1.1 }}
-                    >
+                    <div className="p-3 bg-gradient-accent rounded-xl">
                       <Calculator className="w-6 h-6 text-white" />
-                    </motion.div>
+                    </div>
                     <CardTitle className="text-xl">Последние расчеты</CardTitle>
                   </div>
                   <Badge
                     variant="secondary"
-                    className="glass border-white/20 text-white/90 hover-lift cursor-pointer"
+                    className="glass border-white/20 text-white/90 cursor-pointer"
                   >
                     Все →
                   </Badge>
@@ -275,16 +253,12 @@ const Calculator = () => {
             </Card>
 
             {/* Statistics */}
-            <Card className="glass-card border-0 text-white hover-lift">
+            <Card className="glass-card border-0 text-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                  <motion.div
-                    className="p-3 bg-gradient-secondary rounded-xl"
-                    whileHover={{ rotate: -360 }}
-                    transition={{ duration: 0.8 }}
-                  >
+                  <div className="p-3 bg-gradient-secondary rounded-xl">
                     <TrendingUp className="w-6 h-6 text-white" />
-                  </motion.div>
+                  </div>
                   <CardTitle className="text-xl">
                     Статистика приложения
                   </CardTitle>
@@ -297,25 +271,17 @@ const Calculator = () => {
                     return (
                       <motion.div
                         key={stat.label}
-                        className="text-center glass rounded-xl p-4 hover-lift cursor-pointer"
+                        className="text-center glass rounded-xl p-4 cursor-pointer"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1.2 + index * 0.2, duration: 0.6 }}
-                        whileHover={{ scale: 1.05 }}
+                        transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
+                        whileHover={{ scale: 1.02 }}
                       >
-                        <motion.div
-                          className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center"
-                          animate={{ rotate: [0, 360] }}
-                          transition={{
-                            duration: 10,
-                            repeat: Infinity,
-                            ease: "linear",
-                          }}
-                        >
+                        <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-gradient-primary flex items-center justify-center">
                           <IconComponent className="w-4 h-4 text-white" />
-                        </motion.div>
+                        </div>
                         <div
-                          className={`text-2xl font-bold ${stat.color} mb-1 text-glow`}
+                          className={`text-2xl font-bold ${stat.color} mb-1`}
                         >
                           {stat.value}
                         </div>
