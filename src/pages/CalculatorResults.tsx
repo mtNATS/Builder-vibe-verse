@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -12,6 +12,8 @@ import {
   Sparkles,
   Target,
   Zap,
+  Moon,
+  Sun,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,6 +25,23 @@ import { CalculationResults } from "@/types/calculator";
 const CalculatorResults = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    // Check system preference
+    const isDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+    setIsDark(isDarkMode);
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle("dark");
+  };
 
   // Fallback data in case location.state is undefined
   const defaultResults: CalculationResults = {
@@ -51,8 +70,6 @@ const CalculatorResults = () => {
   const hasValidData = !!location.state?.results;
 
   useEffect(() => {
-    // If user navigated directly to results without going through the form,
-    // we still show fallback data but could optionally redirect
     if (!hasValidData) {
       console.warn("No calculation data found, using fallback data");
     }
@@ -70,51 +87,20 @@ const CalculatorResults = () => {
     }).format(amount);
   };
 
-  const logisticsItems = [
-    {
-      label: "Стоимость доставки",
-      value: results.logistics.deliveryCost,
-      color: "text-blue-400",
-      icon: Package,
-    },
-    {
-      label: "Стоимость хранения",
-      value: results.logistics.storageCost,
-      color: "text-green-400",
-      icon: TrendingUp,
-    },
-    {
-      label: "Стоимость возврата",
-      value: results.logistics.returnCost,
-      color: "text-orange-400",
-      icon: TrendingDown,
-    },
-  ];
-
-  const commissionItems = [
-    {
-      label: "Комиссия маркетплейса",
-      value: results.commissions.marketplaceCommission,
-      percent: results.commissions.marketplaceCommissionPercent,
-      color: "text-red-400",
-      icon: CreditCard,
-    },
-    {
-      label: "Комиссия поставщика",
-      value: results.commissions.supplierCommission,
-      percent: results.commissions.supplierCommissionPercent,
-      color: "text-purple-400",
-      icon: Target,
-    },
-  ];
+  const totalCosts =
+    results.logistics.totalExpenses +
+    results.commissions.marketplaceCommission +
+    results.commissions.supplierCommission;
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
         duration: 0.6,
-        staggerChildren: 0.1,
+        ease: "easeOut",
+        staggerChildren: 0.15,
       },
     },
   };
@@ -128,312 +114,364 @@ const CalculatorResults = () => {
     },
   };
 
-  const totalCosts =
-    results.logistics.totalExpenses +
-    results.commissions.marketplaceCommission +
-    results.commissions.supplierCommission;
-
   return (
-    <div className="min-h-screen morph-bg relative overflow-hidden">
-      {/* Background Effects */}
+    <div
+      className={`min-h-screen relative overflow-hidden ${isDark ? "bg-gradient-mobile-dark" : "bg-gradient-mobile-light"}`}
+    >
+      {/* Simplified background elements matching Index page */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-gradient-accent opacity-20 blur-3xl"
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 15, repeat: Infinity }}
+          className="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-gradient-primary opacity-20 blur-3xl floating"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, -25, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         />
         <motion.div
-          className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-gradient-secondary opacity-15 blur-3xl"
-          animate={{ x: [0, 25, 0] }}
-          transition={{ duration: 20, repeat: Infinity }}
+          className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-gradient-accent opacity-15 blur-3xl floating"
+          animate={{
+            x: [0, -40, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 5,
+          }}
         />
-
-        {/* Success particles */}
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-green-400/60 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -25, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: 2 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
+        <motion.div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-secondary opacity-10 blur-3xl floating"
+          animate={{
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
       </div>
+
+      {/* Theme Toggle */}
+      <motion.button
+        onClick={toggleTheme}
+        className="absolute top-6 right-6 z-50 p-3 glass-button text-foreground"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+      </motion.button>
 
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 p-4 pb-2"
+        className="relative z-10 p-6 pb-2"
       >
         <div className="flex items-center justify-between mb-4 max-w-md mx-auto">
           <Button
             variant="ghost"
             size="icon"
             onClick={goBack}
-            className="glass-button text-white hover:bg-white/20 rounded-full"
+            className="glass-button text-foreground hover:bg-white/10 rounded-full"
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
-          <h1 className="text-lg font-semibold text-white">
+          <h1 className="text-lg font-semibold text-foreground">
             Результаты расчета
           </h1>
           <motion.div
             animate={{ rotate: [0, 360] }}
-            transition={{ duration: 3, repeat: Infinity }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           >
-            <Sparkles className="w-4 h-4 text-green-400" />
+            <Sparkles className="w-5 h-5 text-primary opacity-60" />
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 px-4 pb-6 max-w-md mx-auto">
+      {/* Main Content in Index page style */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
         <motion.div
-          className="space-y-4"
+          className="w-full"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Product Card */}
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0">
-              <CardContent className="p-4">
-                <div className="flex gap-3">
-                  <motion.div
-                    className="w-12 h-12 bg-gradient-secondary rounded-xl flex items-center justify-center shrink-0 relative overflow-hidden"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <Package className="w-6 h-6 text-white relative z-10" />
-                  </motion.div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-white font-medium text-sm leading-tight mb-2">
-                      {results.productInfo.title}
-                    </h3>
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="flex items-center gap-1 glass rounded-full px-2 py-1">
-                        <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                        <span className="text-yellow-400 text-xs font-medium">
-                          {results.productInfo.rating}
-                        </span>
-                      </div>
-                      <Badge
-                        variant="secondary"
-                        className="glass border-white/20 text-white/80 text-xs"
-                      >
-                        {results.productInfo.reviewCount?.toLocaleString(
-                          "ru-RU",
-                        )}{" "}
-                        отзывов
-                      </Badge>
-                    </div>
-                    <div className="text-blue-400 text-lg font-bold">
-                      {formatCurrency(results.productInfo.price)}
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Action Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="grid grid-cols-2 gap-3"
-          >
-            <Button className="glass-button text-white border-white/20 backdrop-blur-sm h-10 text-sm">
-              <Package className="w-4 h-4 mr-2" />
-              Новый расчёт
-            </Button>
-            <Button className="glass-button text-blue-400 border-blue-500/50 hover:bg-blue-500/10 h-10 text-sm">
-              <Info className="w-4 h-4 mr-2" />
-              Подробности
-            </Button>
-          </motion.div>
-
-          {/* Logistics Section */}
-          <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0">
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gradient-accent rounded-lg relative">
-                    <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                    <TrendingUp className="w-4 h-4 text-white relative z-10" />
-                  </div>
-                  <CardTitle className="text-white text-base">
-                    Логистика
-                  </CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-3 pt-0">
-                {logisticsItems.map((item, index) => {
-                  const IconComponent = item.icon;
-                  return (
-                    <motion.div
-                      key={item.label}
-                      className="flex items-center justify-between p-2 glass rounded-lg"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 + index * 0.1 }}
-                      whileHover={{ scale: 1.01 }}
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="p-1 bg-gradient-primary rounded relative">
-                          <div className="absolute inset-0 rounded border border-white/30" />
-                          <IconComponent className="w-3 h-3 text-white relative z-10" />
-                        </div>
-                        <span className="text-white/90 text-sm">
-                          {item.label}:
-                        </span>
-                      </div>
-                      <span className={`font-bold text-sm ${item.color}`}>
-                        {formatCurrency(item.value)}
-                      </span>
-                    </motion.div>
-                  );
-                })}
-
-                <Separator className="bg-white/20 my-3" />
-
+            <Card className="glass-card border-0 shadow-xl">
+              <CardHeader className="text-center relative pb-4">
+                {/* Success sparkle */}
                 <motion.div
-                  className="flex items-center justify-between p-3 glass-intense rounded-lg"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.7 }}
+                  className="absolute -top-2 -right-2"
+                  animate={{
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
                 >
-                  <div className="flex items-center gap-2">
-                    <div className="p-1 bg-gradient-secondary rounded relative">
-                      <div className="absolute inset-0 rounded border border-white/30" />
-                      <Zap className="w-3 h-3 text-white relative z-10" />
-                    </div>
-                    <span className="text-white font-semibold text-sm">
-                      Итого расходы:
+                  <Sparkles className="w-4 h-4 text-green-500 opacity-80" />
+                </motion.div>
+
+                {/* Product Info Header */}
+                <motion.div
+                  className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-secondary opacity-90 rounded-2xl" />
+                  <Package className="w-8 h-8 text-white relative z-10" />
+                </motion.div>
+
+                {/* Product Title */}
+                <CardTitle className="text-lg font-bold text-foreground mb-2 leading-tight">
+                  {results.productInfo.title}
+                </CardTitle>
+
+                {/* Rating and Reviews */}
+                <div className="flex items-center justify-center gap-3 mb-3">
+                  <div
+                    className={`flex items-center gap-1 ${isDark ? "glass" : "neu"} rounded-full px-3 py-1`}
+                  >
+                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                    <span className="text-yellow-400 text-sm font-medium">
+                      {results.productInfo.rating}
                     </span>
                   </div>
-                  <span className="text-red-400 font-bold text-base">
-                    {formatCurrency(results.logistics.totalExpenses)}
-                  </span>
+                  <Badge
+                    variant="secondary"
+                    className={`${isDark ? "glass" : "neu"} border-0 text-muted-foreground text-xs`}
+                  >
+                    {results.productInfo.reviewCount?.toLocaleString("ru-RU")}{" "}
+                    отзывов
+                  </Badge>
+                </div>
+
+                {/* Price */}
+                <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
+                  {formatCurrency(results.productInfo.price)}
+                </div>
+              </CardHeader>
+
+              <CardContent className="pt-0 space-y-6">
+                {/* Action Buttons */}
+                <motion.div
+                  variants={itemVariants}
+                  className="grid grid-cols-2 gap-3"
+                >
+                  <Button
+                    onClick={() => navigate("/calculator/form")}
+                    className={`h-10 text-sm font-medium border-0 ${isDark ? "glass text-primary hover:bg-white/10" : "neu-button bg-gradient-primary text-white"}`}
+                  >
+                    <Package className="w-4 h-4 mr-2" />
+                    Новый расчёт
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className={`h-10 text-sm ${isDark ? "glass border-primary/50 text-primary hover:bg-primary/10" : "neu border-primary/30"}`}
+                  >
+                    <Info className="w-4 h-4 mr-2" />
+                    Подробности
+                  </Button>
+                </motion.div>
+
+                {/* Summary Card */}
+                <motion.div
+                  variants={itemVariants}
+                  className={`p-4 ${isDark ? "glass-intense" : "neu-inset"} rounded-xl relative overflow-hidden`}
+                >
+                  <div className="text-center">
+                    <div className="flex items-center justify-center gap-2 mb-3">
+                      <Target className="w-5 h-5 text-primary" />
+                      <h3 className="text-foreground text-lg font-bold">
+                        Общие затраты
+                      </h3>
+                    </div>
+                    <div className="text-3xl font-bold text-red-500 mb-4">
+                      {formatCurrency(totalCosts)}
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div
+                        className={`p-3 ${isDark ? "glass" : "neu"} rounded-lg`}
+                      >
+                        <div className="text-muted-foreground mb-1">
+                          Логистика
+                        </div>
+                        <div className="text-green-500 font-bold">
+                          {formatCurrency(results.logistics.totalExpenses)}
+                        </div>
+                      </div>
+                      <div
+                        className={`p-3 ${isDark ? "glass" : "neu"} rounded-lg`}
+                      >
+                        <div className="text-muted-foreground mb-1">
+                          Комиссии
+                        </div>
+                        <div className="text-purple-500 font-bold">
+                          {formatCurrency(
+                            results.commissions.marketplaceCommission +
+                              results.commissions.supplierCommission,
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Detailed Breakdown */}
+                <motion.div variants={itemVariants} className="space-y-4">
+                  {/* Logistics Details */}
+                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2 bg-gradient-accent rounded-lg relative">
+                        <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
+                        <TrendingUp className="w-4 h-4 text-white relative z-10" />
+                      </div>
+                      <h4 className="font-semibold text-foreground">
+                        Логистика
+                      </h4>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Доставка:</span>
+                        <span className="font-medium text-blue-500">
+                          {formatCurrency(results.logistics.deliveryCost)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Хранение:</span>
+                        <span className="font-medium text-green-500">
+                          {formatCurrency(results.logistics.storageCost)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Возврат:</span>
+                        <span className="font-medium text-orange-500">
+                          {formatCurrency(results.logistics.returnCost)}
+                        </span>
+                      </div>
+                      <Separator className="my-2 opacity-50" />
+                      <div className="flex justify-between font-semibold">
+                        <span className="text-foreground">Итого:</span>
+                        <span className="text-green-500">
+                          {formatCurrency(results.logistics.totalExpenses)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Commissions Details */}
+                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2 bg-gradient-secondary rounded-lg relative">
+                        <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
+                        <CreditCard className="w-4 h-4 text-white relative z-10" />
+                      </div>
+                      <h4 className="font-semibold text-foreground">
+                        Комиссии
+                      </h4>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <div>
+                          <div className="text-muted-foreground">
+                            Маркетплейс:
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            ({results.commissions.marketplaceCommissionPercent}
+                            %)
+                          </div>
+                        </div>
+                        <span className="font-medium text-red-500">
+                          {formatCurrency(
+                            results.commissions.marketplaceCommission,
+                          )}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <div>
+                          <div className="text-muted-foreground">
+                            Поставщик:
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            ({results.commissions.supplierCommissionPercent}%)
+                          </div>
+                        </div>
+                        <span className="font-medium text-purple-500">
+                          {formatCurrency(
+                            results.commissions.supplierCommission,
+                          )}
+                        </span>
+                      </div>
+                      <Separator className="my-2 opacity-50" />
+                      <div className="flex justify-between font-semibold">
+                        <span className="text-foreground">Итого:</span>
+                        <span className="text-purple-500">
+                          {formatCurrency(
+                            results.commissions.marketplaceCommission +
+                              results.commissions.supplierCommission,
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Main Action Button */}
+                <motion.div variants={itemVariants}>
+                  <Button
+                    onClick={() => navigate("/calculator/form")}
+                    className={`w-full h-12 text-base font-semibold border-0 shadow-lg transition-all duration-200 group ${
+                      isDark
+                        ? "glass text-white hover:bg-white/10"
+                        : "neu-button bg-gradient-primary text-white hover:shadow-xl"
+                    }`}
+                    size="lg"
+                  >
+                    <div className="flex items-center justify-center relative z-10">
+                      <Zap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
+                      Новый расчёт
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform duration-200" />
+                    </div>
+                    {/* Gradient overlay for light theme */}
+                    {!isDark && (
+                      <div className="absolute inset-0 bg-gradient-primary opacity-90 rounded-lg" />
+                    )}
+                  </Button>
+                </motion.div>
+
+                {/* Additional Info */}
+                <motion.div
+                  variants={itemVariants}
+                  className={`p-3 ${isDark ? "glass" : "neu-inset"} rounded-lg`}
+                >
+                  <div className="flex items-center justify-center space-x-2 text-xs text-muted-foreground">
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
+                      <Sparkles className="w-3 h-3 text-primary" />
+                    </motion.div>
+                    <span>
+                      {hasValidData
+                        ? "Расчет выполнен успешно"
+                        : "Демонстрационные данные"}
+                    </span>
+                  </div>
                 </motion.div>
               </CardContent>
             </Card>
-          </motion.div>
-
-          {/* Commissions Section */}
-          <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0">
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-gradient-secondary rounded-lg relative">
-                    <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                    <CreditCard className="w-4 h-4 text-white relative z-10" />
-                  </div>
-                  <CardTitle className="text-white text-base">
-                    Комиссии
-                  </CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-3 pt-0">
-                {commissionItems.map((item, index) => {
-                  const IconComponent = item.icon;
-                  return (
-                    <motion.div
-                      key={item.label}
-                      className="flex items-center justify-between p-2 glass rounded-lg"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + index * 0.1 }}
-                      whileHover={{ scale: 1.01 }}
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="p-1 bg-gradient-primary rounded relative">
-                          <div className="absolute inset-0 rounded border border-white/30" />
-                          <IconComponent className="w-3 h-3 text-white relative z-10" />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="text-white/90 text-sm">
-                            {item.label}:
-                          </span>
-                          <span className="text-white/60 text-xs">
-                            ({item.percent}%)
-                          </span>
-                        </div>
-                      </div>
-                      <span className={`font-bold text-sm ${item.color}`}>
-                        {formatCurrency(item.value)}
-                      </span>
-                    </motion.div>
-                  );
-                })}
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Summary Section */}
-          <motion.div variants={itemVariants}>
-            <Card className="glass-intense border-0 relative overflow-hidden">
-              <CardContent className="p-4 relative z-10">
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-2 mb-3">
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <Sparkles className="w-5 h-5 text-yellow-400" />
-                    </motion.div>
-                    <h3 className="text-white text-lg font-bold">
-                      Общие затраты
-                    </h3>
-                  </div>
-
-                  <div className="text-3xl font-bold text-red-400 mb-4">
-                    {formatCurrency(totalCosts)}
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="glass rounded-lg p-3">
-                      <div className="text-white/70 text-xs mb-1">
-                        Логистика
-                      </div>
-                      <div className="text-green-400 font-bold text-sm">
-                        {formatCurrency(results.logistics.totalExpenses)}
-                      </div>
-                    </div>
-                    <div className="glass rounded-lg p-3">
-                      <div className="text-white/70 text-xs mb-1">Комиссии</div>
-                      <div className="text-purple-400 font-bold text-sm">
-                        {formatCurrency(
-                          results.commissions.marketplaceCommission +
-                            results.commissions.supplierCommission,
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* New Calculation Button */}
-          <motion.div variants={itemVariants}>
-            <Button
-              onClick={() => navigate("/calculator/form")}
-              className="w-full bg-gradient-primary hover:bg-gradient-secondary border-0 text-white h-12 font-bold text-base relative overflow-hidden group"
-            >
-              <Zap className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-              Новый расчёт
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-            </Button>
           </motion.div>
         </motion.div>
       </div>
