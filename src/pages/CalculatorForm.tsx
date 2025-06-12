@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
-  Package,
-  Search,
   Calculator,
-  Loader2,
-  Zap,
+  Search,
   Sparkles,
   Moon,
   Sun,
@@ -15,32 +12,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
-import {
-  CalculatorFormData,
-  MarketplaceOption,
-  BoxOption,
-} from "@/types/calculator";
 
 const CalculatorForm = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const [isDark, setIsDark] = useState(true);
-  const [formData, setFormData] = useState<CalculatorFormData>({
-    box: "",
-    marketplace: "",
-    weight: 0.28,
-    dimensions: { length: 0, width: 0, height: 0 },
-    quantity: 1,
-    price: 435,
-  });
 
   useEffect(() => {
     // Check system preference
@@ -56,70 +32,6 @@ const CalculatorForm = () => {
   const toggleTheme = () => {
     setIsDark(!isDark);
     document.documentElement.classList.toggle("dark");
-  };
-
-  const marketplaces: MarketplaceOption[] = [
-    { value: "wildberries", label: "Wildberries" },
-    { value: "ozon", label: "Ozon" },
-    { value: "yandex", label: "Яндекс.Маркет" },
-    { value: "avito", label: "Avito" },
-  ];
-
-  const boxTypes: BoxOption[] = [
-    { value: "small", label: "Малая коробка (до 1 кг)" },
-    { value: "medium", label: "Средняя коробка (до 5 кг)" },
-    { value: "large", label: "Большая коробка (до 25 кг)" },
-    { value: "envelope", label: "Конверт (до 500 г)" },
-  ];
-
-  const handleInputChange = (field: keyof CalculatorFormData, value: any) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleDimensionChange = (
-    dimension: "length" | "width" | "height",
-    value: string,
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      dimensions: {
-        ...prev.dimensions,
-        [dimension]: parseFloat(value) || 0,
-      },
-    }));
-  };
-
-  const handleCalculate = async () => {
-    setIsLoading(true);
-
-    navigate("/calculator/loading", {
-      state: {
-        formData,
-        targetResults: {
-          logistics: {
-            deliveryCost: 47.5,
-            storageCost: 0.0,
-            returnCost: 137.5,
-            totalExpenses: 185.0,
-          },
-          commissions: {
-            marketplaceCommission: 67.42,
-            marketplaceCommissionPercent: 15.5,
-            supplierCommission: 67.42,
-            supplierCommissionPercent: 15.5,
-          },
-          productInfo: {
-            title: "Протеиновые батончики без сахара Layers Ассорти, 4шт х 60г",
-            price: formData.price,
-            rating: 4.8,
-            reviewCount: 5247,
-          },
-        },
-      },
-    });
   };
 
   const goBack = () => {
@@ -153,7 +65,7 @@ const CalculatorForm = () => {
       className={`min-h-screen relative overflow-hidden ${isDark ? "bg-gradient-mobile-dark" : "bg-gradient-mobile-light"}`}
     >
       {/* Background elements matching Index page */}
-      <div className="absolute inset-0 overflow-hidden sm:-left-[566px] sm:-top-[485px]">
+      <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-gradient-primary opacity-20 blur-3xl floating"
           animate={{
@@ -205,18 +117,18 @@ const CalculatorForm = () => {
         {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
       </motion.button>
 
-      {/* Header */}
+      {/* Header - Unified spacing */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 p-6 pb-2"
+        className="relative z-10 p-6"
       >
-        <div className="flex items-center justify-between mb-4 max-w-md mx-auto">
+        <div className="flex items-center justify-between max-w-md mx-auto">
           <Button
             variant="ghost"
             size="icon"
             onClick={goBack}
-            className="glass-button text-foreground hover:bg-white/10 rounded-full"
+            className="glass-button text-foreground hover:bg-white/10 rounded-full h-12 w-12"
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
@@ -232,8 +144,8 @@ const CalculatorForm = () => {
         </div>
       </motion.div>
 
-      {/* Main Content in Index page style */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-center sm:justify-start sm:items-center p-4 max-w-md mx-auto">
+      {/* Main Content - Unified layout */}
+      <div className="relative z-10 min-h-screen flex flex-col justify-center p-4 max-w-md mx-auto">
         <motion.div
           className="w-full"
           variants={containerVariants}
@@ -241,9 +153,9 @@ const CalculatorForm = () => {
           animate="visible"
         >
           <motion.div variants={itemVariants}>
-            <Card className="glass-card border-0 shadow-xl sm:flex sm:flex-col">
-              <CardHeader className="text-center relative pb-4 sm:pt-6 sm:justify-center sm:items-center sm:ml-auto">
-                {/* Product Icon */}
+            <Card className="glass-card border-0 shadow-xl">
+              <CardHeader className="text-center relative p-6">
+                {/* Product Icon - Unified size */}
                 <motion.div
                   className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${isDark ? "glass" : "neu"} flex items-center justify-center relative overflow-hidden`}
                   whileHover={{ scale: 1.02 }}
@@ -253,49 +165,64 @@ const CalculatorForm = () => {
                   <Calculator className="w-8 h-8 text-white relative z-10" />
                 </motion.div>
 
-                <CardTitle className="text-lg font-bold text-foreground mb-2 leading-tight">
+                {/* Title - Unified typography */}
+                <CardTitle className="text-xl font-bold text-foreground mb-3">
                   Калькулятор WB
                 </CardTitle>
 
-                <div className="text-sm text-muted-foreground mb-4">
+                <div className="text-sm text-muted-foreground mb-6">
                   Расчет логистики и комиссий
                 </div>
               </CardHeader>
 
-              <CardContent className="pt-0 space-y-6 sm:mb-5">
-                {/* Search Section */}
+              <CardContent className="p-6 pt-0 space-y-8">
+                {/* Search Section - Unified spacing */}
                 <motion.div variants={itemVariants}>
-                  <div className={`p-4 ${isDark ? "glass" : "neu"} rounded-lg`}>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 bg-gradient-primary rounded-lg relative">
+                  <div className={`p-6 ${isDark ? "glass" : "neu"} rounded-lg`}>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center relative">
                         <div className="absolute inset-0 rounded-lg border-2 border-white/30" />
-                        <Search className="w-4 h-4 text-white relative z-10" />
+                        <Search className="w-5 h-5 text-white relative z-10" />
                       </div>
-                      <h4 className="font-semibold text-foreground">
+                      <h4 className="text-lg font-semibold text-foreground">
                         Поиск товара
                       </h4>
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-6">
                       <div>
-                        <Label className="text-muted-foreground text-sm mb-2 block">
+                        <Label className="text-muted-foreground text-sm mb-3 block font-medium">
                           Артикул или ссылка
                         </Label>
                         <Input
-                          placeholder="Введите артикул товара"
-                          className={`h-10 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
+                          placeholder="Введите артикул товара или ссылку"
+                          className={`h-12 text-sm ${isDark ? "glass border-white/20 text-white placeholder:text-white/60" : "neu border-gray-200"}`}
                         />
                       </div>
-                      <Button className="w-full h-10 text-sm font-medium bg-gradient-primary text-white border-0">
-                        <Search className="w-4 h-4 mr-2" />
+                      <Button className="w-full h-12 text-base font-semibold bg-gradient-primary text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
+                        <Search className="w-5 h-5 mr-2" />
                         Найти товар
                       </Button>
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Simple placeholder for future content */}
+                {/* Info Section - Unified spacing */}
                 <motion.div variants={itemVariants}>
-                  <div className="flex flex-row"></div>
+                  <div
+                    className={`p-6 ${isDark ? "glass" : "neu-inset"} rounded-lg`}
+                  >
+                    <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
+                      <motion.div
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                      >
+                        <Sparkles className="w-4 h-4 text-primary" />
+                      </motion.div>
+                      <span>
+                        Введите артикул для автоматического заполнения
+                      </span>
+                    </div>
+                  </div>
                 </motion.div>
               </CardContent>
             </Card>
